@@ -1,0 +1,270 @@
+@CHARSET "utf-8";
+
+.side-menu-item:hover, .side-menu-item.active {
+	background: #fff;
+	color: #e51947;
+	font-weight: 600;
+}
+
+.side-menu-item span {
+	color: #e51947;
+}
+
+.button {
+	line-height: 15px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #e51947;
+	-webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .2), inset 0 -2px #e51947;
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, .2), inset 0 -2px #e51947;
+	border: solid 1px #e51947;
+	display: inline-block;
+	padding: 16px 20px;
+	font-size: 11px;
+	color: #fff;
+	font-family: 'bold', sans-serif, Arial;
+	text-transform: uppercase;
+	text-align: center;
+	position: relative;
+}
+
+.button:hover {
+	-webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .2), inset 0 -40px #e51947;
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, .2), inset 0 -40px #e51947;
+}
+
+.author a {
+	font-family: "bold", sans-serif, Arial;
+	color: #e51947;
+}
+
+.tag:hover, .tag.active {
+	color: #fff;
+	background: #e51947;
+}
+
+footer {
+	/*padding: 50px 0 65px;*/
+	font-size: 20px;
+	background: #fff;
+}
+
+footer ul li a {
+	color: #BBBBBB;
+}
+
+footer ul li a.facebook:hover, footer ul li a.facebook.active {
+	color: #3b5998;
+}
+
+footer ul li a.twitter:hover, footer ul li a.twitter.active {
+	color: #55acee;
+}
+
+footer ul li a.github:hover, footer ul li a.github.active {
+	color: black;
+}
+
+footer .copyright {
+	font-size: 14px;
+	text-align: center;
+	margin-top: 20px;
+	color: #404040;
+}
+
+#logo img {
+	max-width: 140px;
+}
+
+.menu-entry .submenu a:hover, .menu-entry .submenu a.active, .menu-entry:hover>a, .menu-entry.active>a, .menu-entry:hover .submenu-icon span,
+	.menu-entry.active .submenu-icon span {
+	color: #e51947;
+}
+
+.header-right {
+	float: right;
+	width: auto;
+}
+
+nav {
+	margin: 10px 0 0 0;
+}
+
+.menu-entry a {
+	font-size: 16px;
+	font-weight: 200;
+}
+
+.block.type-14:before {
+	background: rgba(0, 0, 0, 0);
+}
+
+.block.type-10.style-1:before {
+	background: rgba(0, 0, 0, 0);
+}
+
+.paginator .button {
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, .2), inset 0 -40px #f9f9f9;
+	background-color: #f9f9f9;
+	border: solid 1px #f9f9f9;
+	color: #6a7483;
+}
+
+.subheader-left {
+	margin: 37px 0 0 40px;
+}
+
+.block-form .prefix.select {
+	position: static;
+	background: #e51947;
+	color: white;
+	width: 100%;
+}
+
+.block-form.submit input[type="submit"] {
+	color: white;
+	background: center center no-repeat #e51947;
+}
+
+.write-form {
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #f9f9f9;
+	-webkit-box-shadow: 1px 1px rgba(0, 0, 0, .05);
+	box-shadow: 1px 1px rgba(0, 0, 0, .05);
+	padding: 5px;
+}
+
+.blog-wrapper.wirte {
+	padding-top: 10px;
+}
+
+.block-button-container.write-button {
+	clear: both;
+	position: static;
+}
+
+select {
+	height: 50px !important;
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, .2) !important;
+	border: 0px !important;
+}
+
+.home_1 {
+	color: white;
+	font-size: 25px;
+}
+
+.block, .block.type-8.style-1 {
+	padding: 80px 0 40px 0;
+}
+
+.container.about {
+	padding-top: 120px;
+	padding-bottom: 10px;
+}
+
+.img_contact2 {
+	display: none;
+}
+
+.img_about2 {
+		display: none;
+	}
+
+@media ( min-width : 992px) {
+	header.reduced .header-right {
+		padding-top: 0px;
+	}
+	.menu-entry .submenu div {
+		text-align: left;
+	}
+	.write-form {
+		padding: 30px;
+	}
+}
+
+@media ( max-width : 1199px) {
+	.header-right {
+		width: auto;
+	}
+}
+
+@media ( max-width : 991px) {
+	.header-left, .header-right {
+		float: none;
+		width: auto;
+	}
+	.bok_block {
+		background-position: 80% center;
+	}
+}
+
+@media ( max-width : 768px) {
+	.block.type-10.bok_block .vertical-align {
+		position: absolute;
+		top: 220px;
+		transform: translateY(0%);
+		-moz-transform: translateY(0%);
+		-webkit-transform: translateY(0%);
+		-ms-transform: translateY(0%);
+	}
+	.container.about {
+		padding-top: 80px;
+	}
+}
+
+@media ( max-width : 767px) {
+	.img_contact {
+		display: none;
+	}
+	
+	.img_contact2 {
+		display: block;
+	}
+	
+	.img_about {
+		display: none;
+	}
+	
+	.img_about2 {
+		display: block;
+	}
+	
+}
+
+/* 아이폰6플러스 */
+@media ( max-width : 414px) {
+	.home_1 {
+		font-size: 20px;
+	}
+	.container.about {
+		padding-top: 50px;
+	}
+}
+
+/* 아이폰6 */
+@media ( max-width : 375px) {
+	.home_1 {
+		font-size: 17px;
+	}
+	.container.about {
+		padding-top: 40px;
+	}
+}
+
+/* 아이폰5 */
+@media ( max-width : 320px) {
+	.home_1 {
+		font-size: 15px;
+	}
+	.container.about {
+		padding-top: 35px;
+	}
+}
+
+.paginator .button {
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, .2), inset 0 -40px #e51947;
+	background-color: #e51947;
+	color: white;
+}

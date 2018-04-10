@@ -1,0 +1,36 @@
+@CHARSET "utf-8";
+
+.blog-item-page {
+	margin-bottom: 0px;
+}
+
+.content img{
+	max-width: 100%;
+	height: initial !important;
+}
+
+.content table{
+	width:auto !important;
+	max-width: 100%;
+}
+
+.content th, .content td{
+	width:auto !important;
+	max-width: 100%;
+}
+
+.content iframe {
+	max-width: 100%;
+}
+
+.author b a{
+	color: black;
+}
+
+.typography-block{
+	margin-top: 10px;
+}
+
+.inline-form{
+	display: inline-block;
+}
