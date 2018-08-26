@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileUtil {
 	//private final String filePath = "C:\\dev\\file\\";
-	private final String filePath = "/home/ubuntu/upload/";
+	private final String filePath = "/home/ec2-user/upload/";
 	
 	public void parseInsertFileHeader(Board content, MultipartFile multipartFile) throws Exception{
 		String originalFileName = null;
