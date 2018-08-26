@@ -106,7 +106,7 @@
 										<div class="cell-view">
 											<div class="date">2015 취업</div>
 											<h3 class="title">일동제약 입사</h3>
-											<div class="text">늦깍이 취업 준비, 수 없는 좌절 끝에 나를 받아준 회사. 일동제약 정보전략팀에 입사하다.</div>
+											<div class="text">일동제약 정보전략팀에 입사하다.</div>
 										</div>
 									</div>
 								</div>
