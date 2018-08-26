@@ -20,11 +20,11 @@ public class MessageController {
     MessageDao messageDao;
 
     @RequestMapping(value = "/messageSave", method = RequestMethod.POST)
-    String messageSave(Message message){
+    String messageSave(Message message) {
         message = messageDao.save(message.saveDefualt(message));
-        if(message != null){
+        if (message != null) {
             return "메시지를 전송했습니다"; //메시지 저장 성공
-        }else{
+        } else {
             return "메시지 전송에 실패했습니다."; //메시지 저장 실패
         }
     }

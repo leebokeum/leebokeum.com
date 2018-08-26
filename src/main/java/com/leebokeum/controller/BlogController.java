@@ -49,11 +49,11 @@ public class BlogController {
 
     //일반 글쓰기 저장
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    String save(Content contents, @RequestParam("repImage") MultipartFile repImage) throws Exception{
+    String save(Content contents, @RequestParam("repImage") MultipartFile repImage) throws Exception {
         FileUtil fileUtils = new FileUtil();
         contentDao.save(contents);
 
-        if(!repImage.isEmpty()){
+        if (!repImage.isEmpty()) {
             fileUtils.parseInsertFileHeader(contents, repImage);
         }
         contentDao.save(contents.saveDefualt(contents));
@@ -81,11 +81,11 @@ public class BlogController {
         originContent.setTag(content.getTag());
         originContent.setCreaterName(content.getCreaterName());
         FileUtil fileUtils = new FileUtil();
-        if(!repImage.isEmpty()){
+        if (!repImage.isEmpty()) {
             fileUtils.parseInsertFileHeader(originContent, repImage);
         }
         contentDao.save(originContent);
-        return "redirect:/content/"+ originContent.getId();
+        return "redirect:/content/" + originContent.getId();
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -99,17 +99,17 @@ public class BlogController {
     //댓글 쓰기
     @RequestMapping(value = "/replySave", method = RequestMethod.POST)
     @ResponseBody
-    Reply replySave(Reply reply){
+    Reply replySave(Reply reply) {
         reply = replyDao.save(reply.saveDefualt(reply));
         return reply;
     }
 
     @RequestMapping(value = "/blog")
     String blogListAll(Model model,
-                          @PageableDefault(sort = { "id" }, direction = Sort.Direction.DESC, size = 5) Pageable pageableDesc) {
+                       @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageableDesc) {
         Page<Content> contentList = contentDao.findByDeleteFlag("N", pageableDesc);
-        List<Content> noticeList = contentDao.findByDeleteFlagAndNoticeFlagOrderByIdDesc("N","Y");
-        List<BlogCategory> categoryList =  blogCategoryDao.findAll();
+        List<Content> noticeList = contentDao.findByDeleteFlagAndNoticeFlagOrderByIdDesc("N", "Y");
+        List<BlogCategory> categoryList = blogCategoryDao.findAll();
         PageBlock pageBlock = new PageBlock(contentList);
         model.addAttribute("contentList", contentList);
         model.addAttribute("noticeList", noticeList);
@@ -121,11 +121,11 @@ public class BlogController {
 
     @RequestMapping(value = "/blog/{categoryId}")
     String blogListByCategory(Model model,
-                       @PageableDefault(sort = { "id" }, direction = Sort.Direction.DESC, size = 5) Pageable pageableDesc,
+                              @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageableDesc,
                               @PathVariable int categoryId) {
         Page<Content> contentList = contentDao.findByDeleteFlagAndCategoryId("N", categoryId, pageableDesc);
-        List<Content> noticeList = contentDao.findByDeleteFlagAndNoticeFlagOrderByIdDesc("N","Y");
-        List<BlogCategory> categoryList =  blogCategoryDao.findAll();
+        List<Content> noticeList = contentDao.findByDeleteFlagAndNoticeFlagOrderByIdDesc("N", "Y");
+        List<BlogCategory> categoryList = blogCategoryDao.findAll();
         PageBlock pageBlock = new PageBlock(contentList);
         model.addAttribute("contentList", contentList);
         model.addAttribute("noticeList", noticeList);
@@ -137,10 +137,10 @@ public class BlogController {
 
     @RequestMapping("content/{id}")
     public String content(Model model, @PathVariable int id, HttpServletResponse response, HttpServletRequest request) {
-        HitIncement hitIncrement =  new HitIncement();
+        HitIncement hitIncrement = new HitIncement();
         Board content = hitIncrement.addHit(contentDao, id, response, request, "leebokeum"); //조회수 늘리기
-        List<Content> noticeList = contentDao.findByDeleteFlagAndNoticeFlagOrderByIdDesc("N","Y");
-        List<BlogCategory> categoryList =  blogCategoryDao.findAll();
+        List<Content> noticeList = contentDao.findByDeleteFlagAndNoticeFlagOrderByIdDesc("N", "Y");
+        List<BlogCategory> categoryList = blogCategoryDao.findAll();
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("content", content);

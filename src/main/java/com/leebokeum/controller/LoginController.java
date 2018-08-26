@@ -25,28 +25,28 @@ public class LoginController {
 
     @RequestMapping(value = "/sign", method = RequestMethod.POST)
     @ResponseBody
-    public String sign(HttpSession session, User user){
+    public String sign(HttpSession session, User user) {
         user = userDao.findByUserId(user.getUserId());
 
-        if(user != null && user.getState().equals("Y")){
+        if (user != null && user.getState().equals("Y")) {
             session.setAttribute("sessionUser", user);
             return "200";
-        }else if(user != null && user.getState().equals("N")) {
+        } else if (user != null && user.getState().equals("N")) {
             return "500";
-        }else {
+        } else {
             return "404";
         }
     }
 
     @RequestMapping(value = "/join", method = RequestMethod.POST)
-    public String join(User user){
+    public String join(User user) {
         user.setState("N");
         userDao.save(user);
         return "home";
     }
 
     @RequestMapping("/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session) {
         session.invalidate();
         return "home";
     }
