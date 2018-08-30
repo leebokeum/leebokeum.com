@@ -152,4 +152,16 @@ public class BlogController {
     List<BlogCategory> categoryList() {
         return blogCategoryDao.findAll();
     }
+
+    @RequestMapping(value = "/addCategory", method = RequestMethod.POST)
+    @ResponseBody
+    BlogCategory addMenu(BlogCategory blogCategory) {
+        blogCategory.setCategoryDesktopYn("Y");
+        blogCategory.setCategoryLevel(1);
+        blogCategory.setCategoryMobileYn("Y");
+        blogCategory.setCategoryOrder(blogCategoryDao.findMaxOrder() + 1);
+        blogCategory.setCategoryParent(0);
+        blogCategory.setDeleteFlag("N");
+        return blogCategoryDao.save(blogCategory);
+    }
 }

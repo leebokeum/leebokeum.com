@@ -80,7 +80,7 @@
 												<label>카테고리 추가</label>
 												<div class="block-form-wrapper">
 													<div class="block-form submit">
-														<input type="submit" form="addMenuForm" value="추가"> <input type="text" name ="menuName" id="addMenu" form="addMenuForm"
+														<input type="submit" form="addMenuForm" value="추가"> <input type="text" name ="categoryName" id="addMenu" form="addMenuForm"
 																												   placeholder="추가할 카테고리명을 입력하세요.">
 													</div>
 												</div>
@@ -138,7 +138,7 @@
 												<label>카테고리 추가</label>
 												<div class="block-form-wrapper">
 													<div class="block-form submit">
-														<input type="submit" form="addMenuForm" value="추가"> <input type="text" name ="menuName" id="addMenu" form="addMenuForm"
+														<input type="submit" form="addCategoryForm" value="추가"> <input type="text" name ="categoryName" id="addCategory" form="addCategoryForm"
 															placeholder="추가할 카테고리명을 입력하세요.">
 													</div>
 												</div>
@@ -153,7 +153,7 @@
 								</div>
 							</div>
 						</form>
-						<form id="addMenuForm"></form>
+						<form id="addCategoryForm"></form>
 					</div>
 				</div>
 			</div>
@@ -193,18 +193,17 @@
 			});
 			
 
-			$("#addMenuForm").submit(
+			$("#addCategoryForm").submit(
 					function(e) {
 						$.ajax({
 							type : 'POST',
 							dataType : 'json',
-							url : '/addMenu',
-							data : $("#addMenuForm").serialize(),
+							url : '/addCategory',
+							data : $("#addCategoryForm").serialize(),
 							success : function(result) {
 								 $('select').append(
-										$("<option></option>").attr("value", result.menuId).text(result.menuName));
-								 //swal(result.category_name + " 이 추가되었습니다.");
-								 swal('추가되었습니다', result.menuName + " 이 추가되었습니다.", "success")
+										$("<option></option>").attr("value", result.id).text(result.categoryName));
+								 swal('추가되었습니다', result.categoryName + " 이 추가되었습니다.", "success")
 							}
 						});
 
