@@ -26,8 +26,7 @@ public class LoginController {
     @RequestMapping(value = "/sign", method = RequestMethod.POST)
     @ResponseBody
     public String sign(HttpSession session, User user) {
-        user = userDao.findByUserId(user.getUserId());
-
+        user = userDao.findByUserIdAndPassword(user.getUserId(), user.getPassword());
         if (user != null && user.getState().equals("Y")) {
             session.setAttribute("sessionUser", user);
             return "200";
