@@ -3,8 +3,8 @@
 
 <div class="col-md-3 wow fadeInRight animated">
 	<div class="search-form">
-		<form>
-			<input type="text" placeholder="Keyword ..."> <input type="submit" value="">
+		<form action="/blog/search" method="post">
+			<input type="text" placeholder="Keyword ..." name="keyword"> <input type="submit" value="">
 		</form>
 	</div>
 	<div class="side-menu">
@@ -53,16 +53,14 @@
 	<div class="side-menu">
 		<div class="title">인기태그</div>
 		<div class="tags-wrapper">
-			<c:if test="${contentList ne null}">
-				<c:forEach var="list" items="${contentList.content}" varStatus="status">
-					<c:forEach var="tag" items="${list.getTagSplit() }">
-						<a class="tag active" href="/blog">${tag}</a>
-					</c:forEach>
+			<c:if test="${tags ne null}">
+				<c:forEach var="tag" items="${tags}" varStatus="status">
+					<a class="tag active" href="/blog/tag/${tag}">${tag}</a>
 				</c:forEach>
 			</c:if>
 			<c:if test="${content ne null}">
 				<c:forEach var="tag" items="${content.getTagSplit() }">
-					<a class="tag active" href="/blog">${tag}</a>
+					<a class="tag active" href="/blog/tag/${tag}">${tag}</a>
 				</c:forEach>
 			</c:if>
 		</div>

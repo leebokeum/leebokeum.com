@@ -5,7 +5,7 @@
 
 <c:import url="/common/nav.jsp" />
 <!-- Main Content -->
-
+<body>
 <div id="content-wrapper">
 	<div class="container-above-header"></div>
 	<div class="blocks-container">
@@ -134,5 +134,4 @@
 		});
 	</script>
 </body>
-
 </html>

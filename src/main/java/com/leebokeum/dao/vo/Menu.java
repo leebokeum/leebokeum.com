@@ -1,11 +1,10 @@
 package com.leebokeum.dao.vo;
 
 import lombok.Data;
+import org.hibernate.annotations.Where;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by 이복음 on 2017-06-10.
@@ -27,4 +26,10 @@ public class Menu {
     private String menuCustom;
     private int menuOrder;
     private String deleteFlag;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name="menuParent", referencedColumnName="id")
+    @OrderBy(value="menuOrder")
+    @Where(clause="delete_flag='N'")
+    List<Menu> subMenu;
 }

@@ -1,9 +1,6 @@
 package com.leebokeum.controller;
 
-import com.leebokeum.common.Board;
-import com.leebokeum.common.FileUtil;
-import com.leebokeum.common.HitIncement;
-import com.leebokeum.common.PageBlock;
+import com.leebokeum.common.*;
 import com.leebokeum.dao.BlogCategoryDao;
 import com.leebokeum.dao.ContentDao;
 import com.leebokeum.dao.MenuDao;
@@ -27,15 +24,13 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by 이복음 on 2017-06-06.
  */
 @Controller
-public class BlogController {
+public class BlogViewController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -57,13 +52,14 @@ public class BlogController {
             fileUtils.parseInsertFileHeader(contents, repImage);
         }
         contentDao.save(contents.saveDefualt(contents));
-        return "redirect:/home";
+        return "redirect:/blog";
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     String modify(Model model, @RequestParam("id") int id) {
         Content content = contentDao.findOne(id);
         model.addAttribute("content", content);
+        getMenu(model);
         return "write";
     }
 
@@ -96,13 +92,6 @@ public class BlogController {
         return "redirect:/blog";
     }
 
-    //댓글 쓰기
-    @RequestMapping(value = "/replySave", method = RequestMethod.POST)
-    @ResponseBody
-    Reply replySave(Reply reply) {
-        reply = replyDao.save(reply.saveDefualt(reply));
-        return reply;
-    }
 
     @RequestMapping(value = "/blog")
     String blogListAll(Model model,
@@ -115,6 +104,9 @@ public class BlogController {
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("pageBlock", pageBlock);
+        getMenu(model);
+        Tags tags = new Tags();
+        model.addAttribute("tags", tags.getTagList(contentList));
         return "blog";
     }
 
@@ -132,6 +124,9 @@ public class BlogController {
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("pageBlock", pageBlock);
         model.addAttribute("categoryId", categoryId);
+        getMenu(model);
+        Tags tags = new Tags();
+        model.addAttribute("tags", tags.getTagList(contentList));
         return "blog";
     }
 
@@ -144,24 +139,51 @@ public class BlogController {
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("content", content);
+        getMenu(model);
         return "post";
     }
 
-    @RequestMapping(value = "/category", method = RequestMethod.POST)
-    @ResponseBody
-    List<BlogCategory> categoryList() {
-        return blogCategoryDao.findAll();
+    @RequestMapping(value = "/blog/tag/{tag}")
+    String blogListByTag(Model model,
+                              @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageableDesc,
+                              @PathVariable String tag) {
+        String tag_ = "%" + tag + "%";
+        Page<Content> contentList = contentDao.findByDeleteFlagAndTagLikeOrderByIdDesc("N", tag_, pageableDesc);
+        List<Content> noticeList = contentDao.findByDeleteFlagAndNoticeFlagOrderByIdDesc("N", "Y");
+        List<BlogCategory> categoryList = blogCategoryDao.findAll();
+        PageBlock pageBlock = new PageBlock(contentList);
+        Tags tags = new Tags();
+        model.addAttribute("tags", tags.getTagList(contentList));
+        model.addAttribute("contentList", contentList);
+        model.addAttribute("noticeList", noticeList);
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("pageBlock", pageBlock);
+        getMenu(model);
+        return "blog";
     }
 
-    @RequestMapping(value = "/addCategory", method = RequestMethod.POST)
-    @ResponseBody
-    BlogCategory addMenu(BlogCategory blogCategory) {
-        blogCategory.setCategoryDesktopYn("Y");
-        blogCategory.setCategoryLevel(1);
-        blogCategory.setCategoryMobileYn("Y");
-        blogCategory.setCategoryOrder(blogCategoryDao.findMaxOrder() + 1);
-        blogCategory.setCategoryParent(0);
-        blogCategory.setDeleteFlag("N");
-        return blogCategoryDao.save(blogCategory);
+    @RequestMapping(value = "/blog/search" , method = RequestMethod.POST)
+    String blogListByKeyowrd(Model model,
+                         @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageableDesc,
+                             @RequestParam("keyword") String keyword) {
+        String keyword_ = "%" + keyword + "%";
+        Page<Content> contentList = contentDao.findByDeleteFlagAndContentsLikeOrderByIdDesc("N", keyword_, pageableDesc);
+        List<Content> noticeList = contentDao.findByDeleteFlagAndNoticeFlagOrderByIdDesc("N", "Y");
+        List<BlogCategory> categoryList = blogCategoryDao.findAll();
+        PageBlock pageBlock = new PageBlock(contentList);
+        Tags tags = new Tags();
+        model.addAttribute("tags", tags.getTagList(contentList));
+        model.addAttribute("contentList", contentList);
+        model.addAttribute("noticeList", noticeList);
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("pageBlock", pageBlock);
+        getMenu(model);
+        return "blog";
+    }
+
+
+    private void getMenu(Model model){
+        List<Menu> menuList = menuDao.findByDeleteFlagOrderByMenuOrderAsc("N");
+        model.addAttribute("menuList", menuList);
     }
 }

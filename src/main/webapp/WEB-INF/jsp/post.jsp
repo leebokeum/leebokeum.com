@@ -53,6 +53,25 @@
 	<link href="/css/content.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/css/alert/alertify.min.css" />
 
+	<script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1561168777532546',
+                xfbml      : true,
+                version    : 'v3.1'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+	</script>
+
 </head>
 
 <body>
@@ -98,6 +117,13 @@
 
 								<div class="typography-block cke_contents_ltr">
 									${content.contents }
+								</div>
+
+								<div
+										class="fb-like"
+										data-share="true"
+										data-width="450"
+										data-show-faces="true">
 								</div>
 							</div>
 							<div class="clear"></div>

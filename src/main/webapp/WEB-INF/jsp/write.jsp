@@ -163,7 +163,7 @@
 	<c:import url="/common/footer.jsp" />
 	<script type="text/javascript">
 		$(function() {
-            $(".menu-entry").eq(4).addClass("active");
+            $(".menu-entry").eq(5).addClass("active");
 
 			var editor = CKEDITOR.replace('editor', {
 				height : 500

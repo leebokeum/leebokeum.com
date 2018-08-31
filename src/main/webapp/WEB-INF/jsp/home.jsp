@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/common/header.jsp" />
-
+<body>
 <c:import url="/common/nav.jsp" />
 <!-- Main Content -->
 <div class="subheader">
 	<div class="container-fluid">
-		<a id="subheader-logo" href="home.jsp"><img src="/img/logo_black.png" alt=""></a>
+		<a id="subheader-logo" href="/home"><img src="/img/logo_black.png" width="150" alt=""></a>
 		<div class="subheader-content">
 			<div class="subheader-left">
 				<a class="scroll-to-link subheader-link" data-rel="1" href="/home">Home</a> <a class="scroll-to-link subheader-link" data-rel="2" href="/blog">Blog</a> <a

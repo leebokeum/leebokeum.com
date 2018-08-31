@@ -15,4 +15,6 @@ public interface ContentDao extends JpaRepository<Content, Integer> {
     Page<Content> findByDeleteFlag(String deleteFlag, Pageable pageReguest);
     Page<Content> findByDeleteFlagAndCategoryId(String deleteFlag, int categoryId, Pageable pageReguest);
     List<Content> findByDeleteFlagAndNoticeFlagOrderByIdDesc(String deleteFlag, String noticeFlag);
+    Page<Content> findByDeleteFlagAndTagLikeOrderByIdDesc(String deleteFlag, String tag, Pageable pageReguest);
+    Page<Content> findByDeleteFlagAndContentsLikeOrderByIdDesc(String deleteFlag, String keyword, Pageable pageReguest);
 }
