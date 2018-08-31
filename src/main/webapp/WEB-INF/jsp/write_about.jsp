@@ -56,10 +56,10 @@
 						<div class="col-sm-10">
 							<c:choose>
 								<c:when test="${about ne null }">
-									<textarea id="editor" name="content" rows="50" cols="80" class="form-control" placeholder="내용을 입력해주세요">${about.content}</textarea>
+									<textarea id="editor" name="content" id="content" rows="50" cols="80" class="form-control" placeholder="내용을 입력해주세요">${about.content}</textarea>
 								</c:when>
 								<c:otherwise>
-									<textarea id="editor" name="content" rows="50" cols="80" class="form-control" placeholder="내용을 입력해주세요"></textarea>
+									<textarea id="editor" name="content" id="content" rows="50" cols="80" class="form-control" placeholder="내용을 입력해주세요"></textarea>
 								</c:otherwise>
 							</c:choose>
 						</div>

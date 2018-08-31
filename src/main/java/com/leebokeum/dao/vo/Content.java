@@ -7,6 +7,7 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -56,9 +57,16 @@ public class Content implements Board {
     @Where(clause="delete_flag='N'")
     private List<Reply> reply;
 
-    public String[] getTagSplit() {
-        String[] tagSplit = this.tag.trim().split(",");
-        return tagSplit;
+    public List<String> getTagSplit() {
+        String[] tagSplit = this.tag.replace("#", ",").split(",");
+        ArrayList<String> tags = new ArrayList<String>();
+        for (String tag:tagSplit ) {
+            if(!tag.trim().equals("")){
+                tags.add(tag.trim());
+            }
+        }
+
+        return tags;
     }
 
     public Content saveDefualt(Content content){
