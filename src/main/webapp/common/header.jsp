@@ -15,8 +15,8 @@
 <meta property="og:image" content="http://leebokeum.com/img/link.jpg" />
 <meta property='og:description' content="이복음의 개인 웹사이트입니다. 이복음 소개, 블로그등을 보실 수 있습니다. "/>  
 
-<link rel="apple-touch-icon" href="/img/icon.png" />
-<link rel="shortcut icon" href="/img/icon.png" />
+<link rel="apple-touch-icon" href="/img/logo.png" />
+<link rel="shortcut icon" href="/img/logo.png" />
 
 <title>leebokeum.com</title>
 
@@ -40,10 +40,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-<script>
-UPLOADCARE_PUBLIC_KEY = '0a9fec31180c041033b4';
-</script>
 
 
 </head>

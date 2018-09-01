@@ -26,6 +26,7 @@ public class Menu {
     private String menuCustom;
     private int menuOrder;
     private String deleteFlag;
+    private String menuAuth;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name="menuParent", referencedColumnName="id")
