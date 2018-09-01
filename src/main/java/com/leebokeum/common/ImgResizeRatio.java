@@ -24,22 +24,29 @@ public class ImgResizeRatio {
             imageWidth = image.getWidth(null);
             imageHeight = image.getHeight(null);
 
-            if(mainPosition.equals("W")){    // 넓이기준
 
-                ratio = (double)newWidth/(double)imageWidth;
-                w = (int)(imageWidth * ratio);
-                h = (int)(imageHeight * ratio);
+            if(imageWidth > 800) {
 
-            }else if(mainPosition.equals("H")){ // 높이기준
+                if (mainPosition.equals("W")) {    // 넓이기준
 
-                ratio = (double)newHeight/(double)imageHeight;
-                w = (int)(imageWidth * ratio);
-                h = (int)(imageHeight * ratio);
+                    ratio = (double) newWidth / (double) imageWidth;
+                    w = (int) (imageWidth * ratio);
+                    h = (int) (imageHeight * ratio);
 
-            }else{ //설정값 (비율무시)
+                } else if (mainPosition.equals("H")) { // 높이기준
 
-                w = newWidth;
-                h = newHeight;
+                    ratio = (double) newHeight / (double) imageHeight;
+                    w = (int) (imageWidth * ratio);
+                    h = (int) (imageHeight * ratio);
+
+                } else { //설정값 (비율무시)
+
+                    w = newWidth;
+                    h = newHeight;
+                }
+            }else{
+                w = (int) imageWidth;
+                h = (int) imageHeight;
             }
 
             // 이미지 리사이즈

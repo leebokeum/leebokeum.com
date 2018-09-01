@@ -166,7 +166,9 @@
             $(".menu-entry").eq(5).addClass("active");
 
 			var editor = CKEDITOR.replace('editor', {
-				height : 500
+				height : 500,
+                filebrowserUploadUrl: '/FileUpload',
+                filebrowserImageUploadUrl: '/ImageUpload'
 			});
 
 

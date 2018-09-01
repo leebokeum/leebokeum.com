@@ -20,7 +20,7 @@
                         <c:forEach var="menu" items="${menuList}" varStatus="status">
 
 
-                            <c:if test="${sessionUser eq null && menu.menuLevel == '1' && menu.menuTargetYn == 'N'}">
+                            <c:if test="${sessionUser eq null && menu.menuLevel == '1' && menu.menuAuth == 'N'}">
                                 <div class="menu-entry">
                                     <a href="${menu.menuLink}">${menu.menuName}</a>
                                     <c:if test="${!empty(menu.subMenu)}">
@@ -30,16 +30,11 @@
                                             <div>
                                                 <c:forEach var="subMenu" items="${menu.subMenu}" varStatus="status">
                                                     <c:choose>
-                                                        <c:when test="${subMenu.menuName == '로그인'}">
-                                                            <a href="${subMenu.menuLink}"
-                                                               id="log">${subMenu.menuName}</a>
-                                                        </c:when>
-                                                        <c:when test="${subMenu.menuName == '회원가입'}">
-                                                            <a href="${subMenu.menuLink}"
-                                                               class="reg">${subMenu.menuName}</a>
+                                                        <c:when test="${subMenu.menuTargetYn == 'Y'}">
+                                                            <a href="${subMenu.menuLink}" ${subMenu.menuCustom} target="_blank">${subMenu.menuName}</a>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <a href="${subMenu.menuLink}">${subMenu.menuName}</a>
+                                                            <a href="${subMenu.menuLink}" ${subMenu.menuCustom}>${subMenu.menuName}</a>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </c:forEach>
@@ -59,7 +54,14 @@
                                             <div class="submenu">
                                                 <div>
                                                     <c:forEach var="subMenu" items="${menu.subMenu}" varStatus="status">
-                                                        <a href="${subMenu.menuLink}">${subMenu.menuName}</a>
+                                                        <c:choose>
+                                                            <c:when test="${subMenu.menuTargetYn == 'Y'}">
+                                                                <a href="${subMenu.menuLink}" ${subMenu.menuCustom} target="_blank">${subMenu.menuName}</a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a href="${subMenu.menuLink}" ${subMenu.menuCustom}>${subMenu.menuName}</a>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </c:forEach>
                                                 </div>
                                             </div>

@@ -34,3 +34,8 @@
 .inline-form{
 	display: inline-block;
 }
+
+blockquote {
+	font-style: normal;
+	font-family: "Century Gothic";
+}

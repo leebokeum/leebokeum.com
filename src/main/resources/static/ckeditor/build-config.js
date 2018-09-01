@@ -1,5 +1,5 @@
 ﻿/**
- * @license Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
@@ -13,10 +13,10 @@
  * (1) http://ckeditor.com/builder
  *     Visit online builder to build CKEditor from scratch.
  *
- * (2) http://ckeditor.com/builder/48843c8467ab47b7cd14c0097b406124
+ * (2) http://ckeditor.com/builder/1ac9717880f439ef2d17fd3e1a728010
  *     Visit online builder to build CKEditor, starting with the same setup as before.
  *
- * (3) http://ckeditor.com/builder/download/48843c8467ab47b7cd14c0097b406124
+ * (3) http://ckeditor.com/builder/download/1ac9717880f439ef2d17fd3e1a728010
  *     Straight download link to the latest version of CKEditor (Optimized) with the same setup as before.
  *
  * NOTE:
@@ -25,54 +25,48 @@
  */
 
 var CKBUILDER_CONFIG = {
-	skin: 'icy_orange',
+	skin: 'moono-lisa',
 	preset: 'full',
 	ignore: [
-		'.bender',
-		'bender.js',
-		'bender-err.log',
-		'bender-out.log',
-		'dev',
 		'.DS_Store',
+		'.bender',
 		'.editorconfig',
 		'.gitattributes',
 		'.gitignore',
-		'gruntfile.js',
 		'.idea',
 		'.jscsrc',
 		'.jshintignore',
 		'.jshintrc',
-		'less',
 		'.mailmap',
+		'.travis.yml',
+		'bender-err.log',
+		'bender-out.log',
+		'bender.ci.js',
+		'bender.js',
+		'dev',
+		'gruntfile.js',
+		'less',
 		'node_modules',
 		'package.json',
-		'README.md',
 		'tests'
 	],
 	plugins : {
 		'a11yhelp' : 1,
 		'about' : 1,
-		'autocorrect' : 1,
-		'autosave' : 1,
-		'base64image' : 1,
+		'autolink' : 1,
 		'basicstyles' : 1,
 		'bidi' : 1,
 		'blockquote' : 1,
-		'chart' : 1,
-		'ckeditor-gwf-plugin' : 1,
 		'clipboard' : 1,
-		'fakeobjects' : 1,
-		'codemirror' : 1,
-		'codesnippet' : 1,
 		'colorbutton' : 1,
 		'colordialog' : 1,
 		'contextmenu' : 1,
+		'copyformatting' : 1,
 		'dialogadvtab' : 1,
 		'div' : 1,
 		'elementspath' : 1,
 		'enterkey' : 1,
 		'entities' : 1,
-		'eqneditor' : 1,
 		'filebrowser' : 1,
 		'find' : 1,
 		'flash' : 1,
@@ -80,18 +74,13 @@ var CKBUILDER_CONFIG = {
 		'font' : 1,
 		'format' : 1,
 		'forms' : 1,
-		'glyphicons' : 1,
-		'googledocs' : 1,
 		'horizontalrule' : 1,
 		'htmlwriter' : 1,
 		'iframe' : 1,
 		'image' : 1,
-		'image2' : 1,
-		'imageresize' : 1,
 		'imagerotate' : 1,
 		'indentblock' : 1,
 		'indentlist' : 1,
-		'insertpre' : 1,
 		'justify' : 1,
 		'language' : 1,
 		'link' : 1,
@@ -101,7 +90,6 @@ var CKBUILDER_CONFIG = {
 		'maximize' : 1,
 		'newpage' : 1,
 		'pagebreak' : 1,
-		'pastebase64' : 1,
 		'pastefromword' : 1,
 		'pastetext' : 1,
 		'pbckcode' : 1,
@@ -115,31 +103,24 @@ var CKBUILDER_CONFIG = {
 		'selectall' : 1,
 		'showblocks' : 1,
 		'showborders' : 1,
-		'slideshow' : 1,
 		'smiley' : 1,
 		'sourcearea' : 1,
-		'sourcedialog' : 1,
 		'specialchar' : 1,
-		'spoiler' : 1,
 		'stylescombo' : 1,
 		'tab' : 1,
 		'table' : 1,
-		'tableresize' : 1,
+		'tableselection' : 1,
 		'tabletools' : 1,
 		'templates' : 1,
-		'tliyoutube' : 1,
 		'toolbar' : 1,
-		'tweetabletext' : 1,
 		'undo' : 1,
-		'uploadcare' : 1,
-		'videodetector' : 1,
-		'wordcount' : 1,
+		'uploadimage' : 1,
 		'wsc' : 1,
 		'wysiwygarea' : 1,
-		'xmas' : 1,
 		'youtube' : 1
 	},
 	languages : {
-		'en' : 1
+		'en' : 1,
+		'ko' : 1
 	}
 };
