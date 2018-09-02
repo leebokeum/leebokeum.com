@@ -74,6 +74,7 @@ footer .copyright {
 
 #logo img {
 	max-width: 140px;
+	outline : none;
 }
 
 .menu-entry .submenu a:hover, .menu-entry .submenu a.active, .menu-entry:hover>a, .menu-entry.active>a, .menu-entry:hover .submenu-icon span,
