@@ -1,10 +1,10 @@
 package com.leebokeum.common;
 
 public interface Board {
-	public void setHit(int hit);
-	public int getHit();
-	public String getTitle();
-	public void setOriginImg1(String originImg1);
-	public void setImg1(String img1);
-	public void setFileSizeImg1(long fileSizeImg1);
+	void setHit(int hit);
+	int getHit();
+	String getTitle();
+	void setOriginImg1(String originImg1);
+	void setImg1(String img1);
+	void setFileSizeImg1(long fileSizeImg1);
 }

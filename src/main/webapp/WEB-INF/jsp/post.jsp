@@ -9,15 +9,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property="og:url" content="http://leebokeum.com/content/${content.id }"/>
+    <meta property="og:url" content="//leebokeum.com/content/${content.id }"/>
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="${content.title }"/>
     <c:choose>
         <c:when test="${content.img1 != null }">
-            <meta property="og:image" content="http://leebokeum.com/images/${content.img1 }"/>
+            <meta property="og:image" content="//leebokeum.com/images/${content.img1 }"/>
         </c:when>
         <c:otherwise>
-            <meta property="og:image" content="http://leebokeum.com/img/link.jpg"/>
+            <meta property="og:image" content="//leebokeum.com/img/link.jpg"/>
         </c:otherwise>
     </c:choose>
 
@@ -117,7 +117,7 @@
 
                             <c:if test="${content.img1 != null }">
                                 <div class="thumbnail-entry">
-                                    <img class="thumbnail-img" src="http://leebokeum.com/images/${content.img1 }"
+                                    <img class="thumbnail-img" src="//leebokeum.com/images/${content.img1 }"
                                          alt="">
                                 </div>
                             </c:if>
