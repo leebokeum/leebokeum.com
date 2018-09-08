@@ -66,7 +66,7 @@ public class BlogRestController {
 
         resultMap.put("fileName", "uploadedImage");
         resultMap.put("uploaded", "1");
-        resultMap.put("url", "http://leebokeum.com/images/" + imageUrl);
+        resultMap.put("url", "//leebokeum.com/images/" + imageUrl);
 
         return resultMap;
     }
@@ -84,7 +84,7 @@ public class BlogRestController {
 
         resultMap.put("fileName", "uploadedFile");
         resultMap.put("uploaded", "1");
-        resultMap.put("url", "http://leebokeum.com/file/" + fileUrl);
+        resultMap.put("url", "//leebokeum.com/file/" + fileUrl);
 
         return resultMap;
     }

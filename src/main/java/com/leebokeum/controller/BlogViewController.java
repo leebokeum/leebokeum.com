@@ -76,6 +76,7 @@ public class BlogViewController {
         originContent.setSecretFlag(content.getSecretFlag());
         originContent.setTag(content.getTag());
         originContent.setCreaterName(content.getCreaterName());
+        originContent.setCategoryId(content.getCategoryId());
         FileUtil fileUtils = new FileUtil();
         if (!repImage.isEmpty()) {
             fileUtils.parseInsertFileHeader(originContent, repImage);

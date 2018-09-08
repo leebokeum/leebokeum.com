@@ -32,7 +32,7 @@
 									<c:choose>
 										<c:when test="${content.img1 ne null }">
 											<a class="thumbnail-entry" href="/content/${content.id }" >
-											<img  class="thumbnail-img" src="http://leebokeum.com/images/${content.img1 }" alt="">
+											<img  class="thumbnail-img" src="//leebokeum.com/images/${content.img1 }" alt="">
 											</a> <a class="title" href="/content/${content.id }">${content.title }</a>
 										</c:when>
 										<c:otherwise>

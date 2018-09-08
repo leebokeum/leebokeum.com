@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta property="og:url" content="http://leebokeum.com/" />
+<meta property="og:url" content="//leebokeum.com/" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="이복음닷컴" />
-<meta property="og:image" content="http://leebokeum.com/img/link.jpg" />
+<meta property="og:image" content="//leebokeum.com/img/link.jpg" />
 <meta property='og:description' content="이복음의 개인 웹사이트입니다. 이복음 소개, 블로그등을 보실 수 있습니다. "/>  
 
 <link rel="apple-touch-icon" href="/img/logo.png" />

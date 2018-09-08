@@ -33,12 +33,16 @@
        Remove this if you use the .htaccess -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title></title>
-    <meta name="description" content="">
-    <meta name="author" content="Marcio Aguiar">
-
     <!--  Mobile viewport optimized: j.mp/bplateviewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>har portfolio</title>
+    <link rel="apple-touch-icon" href="/img/logo.png" />
+    <link rel="shortcut icon" href="/img/logo.png" />
+
+    <meta name="description" content="한아름 포트폴리오">
+    <meta name="author" content="한아름">
+
 
     <!-- CSS : implied media="all" -->
     <link rel="stylesheet" href="/flipbook/css/style.css">

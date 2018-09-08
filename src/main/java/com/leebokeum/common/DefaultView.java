@@ -7,6 +7,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 public class DefaultView extends WebMvcConfigurerAdapter {
+
+    /*기본 뷰*/
  
 	@Override
     public void addViewControllers(ViewControllerRegistry registry ) {

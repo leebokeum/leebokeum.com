@@ -38,7 +38,7 @@
 						<div class="side-menu-image-item">
 							<c:if test="${content.img1 != null }">
 								<a class="image" href="/content/${content.id}">
-									<img src="http://leebokeum.com/images/${content.img1 }" alt="">
+									<img src="//leebokeum.com/images/${content.img1 }" alt="">
 								</a>
 							</c:if>
 							  <a class="title" href="/content/${content.id}">${content.title}"</a>
