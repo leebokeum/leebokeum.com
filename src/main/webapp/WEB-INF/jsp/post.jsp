@@ -11,14 +11,14 @@
 
     <meta property="og:url" content="//leebokeum.com/content/${content.id }"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:title" content="${content.title }"/>
+    <meta property="og:title" content="${content.title}"/>
     <c:choose>
         <c:when test="${content.img1 != null }">
             <meta property="og:image" content="//leebokeum.com/images/${content.img1 }"/>
         </c:when>
-        <c:otherwise>
+        <%--<c:otherwise>
             <meta property="og:image" content="//leebokeum.com/img/link.jpg"/>
-        </c:otherwise>
+        </c:otherwise>--%>
     </c:choose>
 
     <meta property='og:description' content="${content.subTitle }"/>
@@ -112,7 +112,7 @@
                         <div class="content">
                             <h1 class="title">${content.title }</h1>
                             <div class="author">
-                                <a href="#">Write</a> by <b><a href="/about">${content.createrName }</a></b>
+                                <a href="#">Written</a> by <b><a href="/about">${content.createrName }</a></b>
                             </div>
 
                             <c:if test="${content.img1 != null }">
