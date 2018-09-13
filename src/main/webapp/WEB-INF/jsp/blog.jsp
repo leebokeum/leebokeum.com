@@ -104,7 +104,14 @@
 									<a class="button" href="?page=${pageBlock.firstPage-2}">Prev Page</a>
 								</c:when>
 								<c:otherwise>
-									<a class="button" href="#">Prev Page</a>
+									<c:choose>
+										<c:when test="${(contentList.number+1) != 1}">
+											<a class="button" href="?page=${contentList.number-1}">Prev Page</a>
+										</c:when>
+										<c:otherwise>
+											<a class="button" href="#">Prev Page</a>
+										</c:otherwise>
+									</c:choose>
 								</c:otherwise>
 							</c:choose>
 
@@ -113,7 +120,14 @@
 									<a class="button" href="?page=${pageBlock.lastPage}">Next Page</a>
 								</c:when>
 								<c:otherwise>
-									<a class="button" href="#">Next Page</a>
+									<c:choose>
+										<c:when test="${(contentList.number+1) != pageBlock.lastPage}">
+											<a class="button" href="?page=${contentList.number+1}">Prev Page</a>
+										</c:when>
+										<c:otherwise>
+											<a class="button" href="#">Next Page</a>
+										</c:otherwise>
+									</c:choose>
 								</c:otherwise>
 							</c:choose>
 						</div>

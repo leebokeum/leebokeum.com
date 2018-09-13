@@ -43,7 +43,7 @@
 							</c:if>
 							  <a class="title" href="/content/${content.id}">${content.title}"</a>
 							<div class="author">
-								<a href="/content/${content.id}">Write</a> by <b>${content.createrName}"</b>
+								<a href="/content/${content.id}">Written</a> by <b>${content.createrName}"</b>
 							</div>
 						</div>
 					</c:forEach>
