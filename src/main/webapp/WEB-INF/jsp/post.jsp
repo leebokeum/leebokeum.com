@@ -10,15 +10,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta property="og:url" content="//leebokeum.com/content/${content.id }"/>
-    <meta property="og:type" content="website"/>
+    <meta property="og:type" content="article"/>
     <meta property="og:title" content="${content.title}"/>
+    <meta property="og:image:type" content="image/jpeg" />
     <c:choose>
         <c:when test="${content.img1 != null }">
             <meta property="og:image" content="//leebokeum.com/images/${content.img1 }"/>
         </c:when>
-        <%--<c:otherwise>
-            <meta property="og:image" content="//leebokeum.com/img/link.jpg"/>
-        </c:otherwise>--%>
+        <c:otherwise>
+            <c:choose>
+                <c:when test="${content.getOgImage() != '' }">
+                    <meta property="og:image" content="${content.getOgImage() }"/>
+                </c:when>
+                <c:otherwise>
+                    <meta property="og:image" content="//leebokeum.com/img/link.jpg" />
+                </c:otherwise>
+            </c:choose>
+        </c:otherwise>
     </c:choose>
 
     <meta property='og:description' content="${content.subTitle }"/>

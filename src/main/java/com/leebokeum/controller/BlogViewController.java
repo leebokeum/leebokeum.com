@@ -16,9 +16,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -186,5 +188,31 @@ public class BlogViewController {
     private void getMenu(Model model){
         List<Menu> menuList = menuDao.findByDeleteFlagOrderByMenuOrderAsc("N");
         model.addAttribute("menuList", menuList);
+    }
+
+    @RequestMapping(value = "/restapi" , method = RequestMethod.GET)
+    @ResponseBody
+    String restapi() {
+        return rest();
+    }
+
+
+    private String rest(){
+        HttpHeaders header = new HttpHeaders();
+        header.add(HttpHeaders.ACCEPT, MediaType.TEXT_HTML_VALUE);
+        //ResponseEntity<String> response = new RestTemplate().exchange("https://kauth.kakao.com/oauth/authorize?client_id=738c14a830537e31159fdf85f33d6b9b&redirect_uri=https://leebokeum.com/oauth&response_type=code", HttpMethod.GET, new HttpEntity(header), String.class);
+        ResponseEntity<String> response = new RestTemplate().exchange("https://kauth.kakao.com/oauth/authorize?client_id=738c14a830537e31159fdf85f33d6b9b&redirect_uri=/oauth&response_type=code", HttpMethod.GET, new HttpEntity(header), String.class);
+        System.out.println(response.getBody().toString());
+        return response.getStatusCode().toString();
+    }
+
+
+    @RequestMapping(value = "/oauth" , method = RequestMethod.GET)
+    void oauth() {
+        System.out.println("확인");
+       /* HttpHeaders header = new HttpHeaders();
+        header.add(HttpHeaders.ACCEPT, MediaType.TEXT_HTML_VALUE);
+        header.add("Authorization","Bearer 738c14a830537e31159fdf85f33d6b9b" );
+        ResponseEntity<String> response = new RestTemplate().exchange("https://kapi.kakao.com/v2/api/talk/memo/send?template_id=12253&template_args=", HttpMethod.POST, new HttpEntity(header), String.class);*/
     }
 }
