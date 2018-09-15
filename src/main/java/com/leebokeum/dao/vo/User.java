@@ -31,4 +31,14 @@ public class User {
     private String password;
     @NotNull
     private String state;
+
+    //카카오톡 로그인을 위한 필드
+    private String nickName;
+    private String profileImage;
+    private String thumbnailImage;
+    private String email;
+    private String ageRange;
+    private String birthday;
+    private String gender;
+
 }

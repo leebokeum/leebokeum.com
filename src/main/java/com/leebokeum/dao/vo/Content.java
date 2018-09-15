@@ -38,20 +38,17 @@ public class Content implements Board {
     private int indent;
     private String password;
     private String createrName;
-    private String deleterName;
     private String createDate;
     private String lastUpdateDate;
-    private String originImg1;
-    private String img1;
-    private long fileSizeImg1;
-    private String originVideo;
-    private String video;
-    private long fileSizeVideo;
     private int categoryId;
-    private String cardNewsYn;
     private String tag;
     private int likes;
     private String secretFlag;
+    private int userId;
+    private String originRepImg;
+    private String repImg;
+    private long fileSizeRepImg;
+
 
     @OneToMany
     @JoinColumn(name = "parentId", referencedColumnName = "id")
@@ -111,7 +108,6 @@ public class Content implements Board {
         content.setFamily(content.getId());
         content.setParent(content.getId());
         content.setDeleteFlag("N");
-        content.setCardNewsYn("N");
         return content;
     }
 

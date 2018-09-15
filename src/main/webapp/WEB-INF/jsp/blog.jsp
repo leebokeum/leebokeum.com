@@ -30,9 +30,9 @@
 							</div>
 							<div class="content">
 									<c:choose>
-										<c:when test="${content.img1 ne null }">
+										<c:when test="${content.repImg ne null }">
 											<a class="thumbnail-entry" href="/content/${content.id }" >
-											<img  class="thumbnail-img" src="//leebokeum.com/images/${content.img1 }" alt="">
+											<img  class="thumbnail-img" src="//leebokeum.com/images/${content.repImg }" alt="">
 											</a> <a class="title" href="/content/${content.id }">${content.title }</a>
 										</c:when>
 										<c:otherwise>

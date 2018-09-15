@@ -11,10 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 이복음 on 2017-06-06.
@@ -42,6 +44,36 @@ public class LoginController {
         } else {
             return "404";
         }
+    }
+
+    @RequestMapping(value = "/kakaoLogin", method = RequestMethod.POST)
+    @ResponseBody
+    public String kakaoLogin(HttpSession session, @RequestParam Map<String, String> mapUser) {
+        User user = null;
+        if (mapUser != null){
+            user = userDao.findByUserId(mapUser.get("id"));
+            if(user != null && user.getState().equals("Y")){
+                session.setAttribute("sessionUser", user);
+            }else if(user != null && user.getState().equals("N")){
+                return "500";
+            } else{ //신규 카카오톡으로 회원승인대기
+                user = new User();
+                user.setAgeRange(mapUser.get("kakao_account[age_range]"));
+                user.setBirthday(mapUser.get("kakao_account[birthday]"));
+                user.setEmail(mapUser.get("kakao_account[email]"));
+                user.setGender(mapUser.get("kakao_account[gender]"));
+                user.setProfileImage(mapUser.get("properties[profile_image]"));
+                user.setThumbnailImage(mapUser.get("properties[thumbnail_image]"));
+                user.setState("N");
+                user.setUserName(mapUser.get("properties[nickname]"));
+                user.setNickName(mapUser.get("properties[nickname]"));
+                user.setUserId(mapUser.get("id"));
+                user.setPassword("kakao");
+                userDao.save(user);
+            }
+            return "200";
+        }
+        return "500";
     }
 
     @RequestMapping(value = "/join", method = RequestMethod.POST)
