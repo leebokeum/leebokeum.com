@@ -14,8 +14,8 @@
     <meta property="og:title" content="${content.title}"/>
     <meta property="og:image:type" content="image/jpeg" />
     <c:choose>
-        <c:when test="${content.img1 != null }">
-            <meta property="og:image" content="//leebokeum.com/images/${content.img1 }"/>
+        <c:when test="${content.repImg != null }">
+            <meta property="og:image" content="//leebokeum.com/images/${content.repImg }"/>
         </c:when>
         <c:otherwise>
             <c:choose>
@@ -123,9 +123,9 @@
                                 <a href="#">Written</a> by <b><a href="/about">${content.createrName }</a></b>
                             </div>
 
-                            <c:if test="${content.img1 != null }">
+                            <c:if test="${content.repImg != null }">
                                 <div class="thumbnail-entry">
-                                    <img class="thumbnail-img" src="//leebokeum.com/images/${content.img1 }"
+                                    <img class="thumbnail-img" src="//leebokeum.com/images/${content.repImg }"
                                          alt="">
                                 </div>
                             </c:if>

@@ -55,8 +55,8 @@
                                                                                                             id="field-1">
                                 </div>
                                 <div class="field-entry">
-                                    <label for="img1">대표 이미지(1장, 선택)</label>
-                                    <input type="file" name="repImage" accept="image/*" id="img1"/>
+                                    <label for="repImg">대표 이미지(1장, 선택)</label>
+                                    <input type="file" name="repImage" accept="image/*" id="repImg"/>
                                 </div>
                                 <div class="field-entry">
                                     <label for="field-2">서두 (50글자 이내) *</label> <textarea required="required"
@@ -125,8 +125,8 @@
                                                                              id="field-1">
                                 </div>
                                 <div class="field-entry">
-                                    <label for="img1">대표 이미지(1장, 선택)</label>
-                                    <input type="file" name="repImage" accept="image/*" id="img1"/>
+                                    <label for="repImg">대표 이미지(1장, 선택)</label>
+                                    <input type="file" name="repImage" accept="image/*" id="repImg"/>
                                 </div>
                                 <div class="field-entry">
                                     <label for="field-2">서두 (50글자 이내) *</label> <textarea required="required"

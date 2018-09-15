@@ -44,9 +44,9 @@ public class FileUtil {
 		ImgResizeRatio imgResizeRatio = new ImgResizeRatio();
 		imgResizeRatio.imgResize(imgOriginalPath + storedFileName, targetFilePath + storedFileName, originalFileExtension , 800, 800);
 
-		content.setOriginImg1(originalFileName);
-		content.setImg1(storedFileName);
-		content.setFileSizeImg1(multipartFile.getSize());
+		content.setOriginRepImg(originalFileName);
+		content.setRepImg(storedFileName);
+		content.setFileSizeRepImg(multipartFile.getSize());
 	}
 
 

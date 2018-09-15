@@ -3,6 +3,7 @@
 
 <c:import url="/common/header.jsp"/>
 <link rel="stylesheet" type="text/css" href="/css/alert/alertify.min.css"/>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <body>
 <c:import url="/common/nav.jsp"/>
@@ -47,6 +48,51 @@
                                         로그인<input type="submit">
                                     </div>
                                 </form>
+                                <a id="custom-login-btn" href="javascript:loginWithKakao()">
+                                    <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="100%" style="margin-top: 5px"/>
+                                <script type='text/javascript'>
+                                    //<![CDATA[
+                                    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+                                    Kakao.init('ecd00a5c80333685992c68be5a531f0a');
+                                    // 카카오 로그인 버튼을 생성합니다.
+                                    function loginWithKakao() {
+                                        // 로그인 창을 띄웁니다.
+                                        Kakao.Auth.login({
+                                            success: function(authObj) {
+                                                // 로그인 성공시, API를 호출합니다.
+                                                Kakao.API.request({
+                                                    url: '/v2/user/me',
+                                                    success: function(user) {
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: "/kakaoLogin",
+                                                            dataType: "json",
+                                                            data: user, // serializes the form's elements.
+                                                            success: function (data) {
+                                                                if (data == '500') {
+                                                                    alertify.error("승인대기중인 ID입니다");
+                                                                } else if (data == '200') {
+                                                                    location.href = "/home";
+                                                                } else {
+                                                                    alertify.error("로그인정보를 확인해주세요");
+                                                                }
+                                                            }
+                                                        });
+                                                    },
+                                                    fail: function(error) {
+                                                        alert(JSON.stringify(error));
+                                                    }
+                                                });
+                                                //window.location.href = 'http://www.abc.com/';
+                                            },
+                                            fail: function(err) {
+                                                alert(JSON.stringify(err));
+                                            }
+                                        });
+                                    };
+
+                                    //]]>
+                                </script>
                             </div>
                         </div>
                     </div>

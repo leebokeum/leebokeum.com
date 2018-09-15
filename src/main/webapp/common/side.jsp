@@ -36,9 +36,9 @@
 				<div class="col-xs-12 col-sm-6 col-md-12 nopadding">
 					<c:forEach var="content" items="${noticeList}" varStatus="status">
 						<div class="side-menu-image-item">
-							<c:if test="${content.img1 != null }">
+							<c:if test="${content.repImg != null }">
 								<a class="image" href="/content/${content.id}">
-									<img src="//leebokeum.com/images/${content.img1 }" alt="">
+									<img src="//leebokeum.com/images/${content.repImg }" alt="">
 								</a>
 							</c:if>
 							  <a class="title" href="/content/${content.id}">${content.title}"</a>
