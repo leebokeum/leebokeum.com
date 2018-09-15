@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/common/header.jsp"/>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <body>
 <c:import url="/common/nav.jsp"/>
 <!-- Main Content -->
@@ -220,9 +221,22 @@
             <div class="container">
 
                 <div class="row wow fadeInDown" style="visibility: hidden; animation-name: none;">
-                    <div class="block-header col-md-6 col-md-offset-3 col-sm-12 col-sm-offset-0">
-                        <h2 class="title">풀스택 개발자 이복음</h2>
-                        <div class="text">클라이언트/서버 개발자</div>
+                    <div class="block-header">
+                        <a class="title" href="javascript:void addPlusFriend()">
+                            풀스택 개발자 <img src="https://developers.kakao.com/assets/img/about/logos/plusfriend/friendadd_small_yellow_rect.png"/>
+                        </a>
+                        <script type='text/javascript'>
+                            //<![CDATA[
+                            // 사용할 앱의 JavaScript 키를 설정해 주세요.
+                            Kakao.init('ecd00a5c80333685992c68be5a531f0a');
+                            function addPlusFriend() {
+                                Kakao.PlusFriend.addFriend({
+                                    plusFriendId: '_xfxiZVj' // 플러스친구 홈 URL에 명시된 id로 설정합니다.
+                                });
+                            }
+                            //]]>
+                        </script>
+                        <div class="text" style="margin-top: 15px;">클라이언트/서버 개발자</div>
                     </div>
                 </div>
 
