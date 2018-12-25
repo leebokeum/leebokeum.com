@@ -111,5 +111,4 @@ public class Content implements Board {
         return content;
     }
 
-    ;
 }
