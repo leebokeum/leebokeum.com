@@ -6,5 +6,4 @@ public interface Board {
 	String getTitle();
 	void setRepImg(String repImg);
 	void setOriginRepImg(String originRepImg);
-	void setFileSizeRepImg(long originRepImg);
 }

@@ -46,7 +46,6 @@ public class FileUtil {
 
 		content.setOriginRepImg(originalFileName);
 		content.setRepImg(storedFileName);
-		content.setFileSizeRepImg(multipartFile.getSize());
 	}
 
 
