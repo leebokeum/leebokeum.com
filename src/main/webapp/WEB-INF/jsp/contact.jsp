@@ -28,26 +28,21 @@
         <div class="block type-3">
             <div class="container">
 
-                <!-- <div class="row wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"> -->
                 <div class="block-header">
-                    <a class="title" href="javascript:void addPlusFriend()">
-                        연락 정보 <img
-                            src="https://developers.kakao.com/assets/img/about/logos/plusfriend/friendadd_small_yellow_rect.png"/>
-                    </a>
-
+                    <div class="title">연락 정보 </div>
                     <div class="text" style="margin-top: 10px;">저에게 연락하시려면 카카오톡 친구 추가 또는 아래를 참고하세요.</div>
-
-
+                    <a href="javascript:void addPlusFriend()">
+                        <img src="https://developers.kakao.com/assets/img/about/logos/plusfriend/friendadd_small_yellow_rect.png"/>
+                    </a>
                 </div>
                 <!-- </div> -->
-
                 <div class="row">
                     <div class="icon-entry col-sm-4 wow fadeInLeft animated" data-wow-delay="0.3s"
                          style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
                         <img class="img-circle" alt="" src="/img/icon-120.png">
                         <div class="content">
                             <h3 class="title">근무지</h3>
-                            <div class="text">서울특별시 서초구 양재동 <br> 바우뫼로 27길 2 <br> 일동제약 정보전략팀</div>
+                            <div class="text">경기도 성남시 분당구 분당내곡로 117  <br> 크래프톤타워 11층 <br> 네이버 비즈니스 플랫폼</div>
                         </div>
                     </div>
                     <div class="icon-entry col-sm-4 wow fadeInUp animated" data-wow-delay="0.4s"
@@ -55,8 +50,7 @@
                         <img class="img-circle" alt="" src="/img/icon-121.png">
                         <div class="content">
                             <h3 class="title">연락처</h3>
-                            <div class="text"><b>사무실:</b> 02-526-3069 <br> <b>Mobile:</b> 010-9915-1341 <br> <b>Fax:</b>
-                                02- 526-3081
+                            <div class="text"><b>사무실:</b> 031-600-6136 <br> <b>Mobile:</b> 010-9915-1341
                             </div>
                         </div>
                     </div>
@@ -65,7 +59,7 @@
                         <img class="img-circle" alt="" src="/img/icon-122.png">
                         <div class="content">
                             <h3 class="title">Email</h3>
-                            <div class="text"><b>회사메일:</b> leebokeum@ildong.com <br> <b>Gmail:</b> leebokeum87@gmail.com
+                            <div class="text"><b>회사메일:</b> bokeum.lee@navercorp.com <br> <b>Gmail:</b> leebokeum87@gmail.com
                                 <br> <b>Hanmail:</b> leebokeum@hanmail.net
                             </div>
                         </div>
