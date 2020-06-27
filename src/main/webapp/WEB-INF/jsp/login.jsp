@@ -48,8 +48,12 @@
                                         로그인<input type="submit">
                                     </div>
                                 </form>
-                                <a id="custom-login-btn" href="javascript:loginWithKakao()">
-                                    <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="100%" style="margin-top: 5px"/>
+                                <a href="javascript:loginWithKakao()">
+                                    <div class="button" style="margin-top: 5px;  background-color: #FEEB06; border: solid 1px #FEEB06; box-shadow: 1px 1px 2px rgba(0, 0, 0, .2), inset 0 -2px #FEEB06; color: black;">
+                                        카카오계정으로 로그인
+                                    </div>
+                                </a>
+
                                 <script type='text/javascript'>
                                     //<![CDATA[
                                     // 사용할 앱의 JavaScript 키를 설정해 주세요.

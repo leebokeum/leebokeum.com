@@ -14,7 +14,6 @@ import java.nio.charset.Charset;
 
 @SpringBootApplication
 @Configuration
-@ComponentScan
 public class LeebokeumApplication {
 
 	public static void main(String[] args) {
