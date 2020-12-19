@@ -90,8 +90,8 @@
 									</div>
 									<div class="content">
 										<div class="cell-view">
-											<div class="date">2020. 4 네이버 비즈니스 플랫폼 입사</div>
-											<h3 class="title">네이버 비즈니스 플랫폼 입사</h3>
+											<div class="date">2020. 4 네이버 클라우드 입사</div>
+											<h3 class="title">네이버 클라우드 입사</h3>
 											<div class="text">하나님의 은혜로 커리어 제 2막을 시작하다. 이직의 모든 과정에서 하나님이 함께 하셨음을 느낀다.</div>
 										</div>
 									</div>

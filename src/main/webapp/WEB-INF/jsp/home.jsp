@@ -204,7 +204,7 @@
                         <img src="/img/home/naver.png" alt="">
                         <div class="content">
                             <h3 class="title">현 네이버 개발자</h3>
-                            <div class="text">네이버 비즈니스플랫폼 WORKPLACE SERVICE 팀</div>
+                            <div class="text">네이버 클라우드 WORKPLACE SERVICE 팀</div>
                         </div>
                     </div>
                     <div class="icon-entry col-xs-12 col-sm-6  col-md-4">
