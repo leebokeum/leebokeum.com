@@ -42,15 +42,14 @@ public class KakaoController {
 
         //json을 자바 객체 맵으로 변환
         try {
-            resultMap = mapperObj.readValue(response.getBody().toString(),
-                    new TypeReference<HashMap<String,String>>(){});
+            resultMap = mapperObj.readValue(response.getBody(), new TypeReference<HashMap<String,String>>(){});
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
         System.out.println(resultMap);
-        return response.getBody().toString();
+        return response.getBody();
     }
 
 
@@ -76,8 +75,6 @@ public class KakaoController {
 
     @RequestMapping(value = "/getUserInfo" , method = {RequestMethod.GET, RequestMethod.POST})
     private String getUserInfo(@RequestParam("accessToken") String accessToken){
-
-
         return null;
     }
 }
