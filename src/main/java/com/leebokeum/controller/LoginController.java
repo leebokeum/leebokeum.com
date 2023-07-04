@@ -52,9 +52,9 @@ public class LoginController {
         User user = null;
         if (mapUser != null){
             user = userDao.findByUserId(mapUser.get("id"));
-            if(user != null && user.getState().equals("Y")){
+            if (user != null && user.getState().equals("Y")){
                 session.setAttribute("sessionUser", user);
-            }else if(user != null && user.getState().equals("N")){
+            } else if(user != null && user.getState().equals("N")){
                 return "500";
             } else{ //신규 카카오톡으로 회원승인대기
                 user = new User();
@@ -76,13 +76,16 @@ public class LoginController {
         return "500";
     }
 
-    @RequestMapping(value = "/join", method = RequestMethod.POST)
-    public String join(User user, Model model) {
-        user.setState("N");
-        userDao.save(user);
-        getMenu(model);
-        return "home";
-    }
+    /**
+     * TODO 당분간 회원 가입을 막는다.
+     */
+    // @RequestMapping(value = "/join", method = RequestMethod.POST)
+    // public String join(User user, Model model) {
+    //     user.setState("N");
+    //     userDao.save(user);
+    //     getMenu(model);
+    //     return "home";
+    // }
 
     @RequestMapping("/logout")
     public String logout(HttpSession session, Model model) {

@@ -9,6 +9,8 @@ import com.leebokeum.dao.vo.Reply;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class BlogRestController {
@@ -31,9 +34,13 @@ public class BlogRestController {
 
     //댓글 쓰기
     @RequestMapping(value = "/replySave", method = RequestMethod.POST)
-    Reply replySave(Reply reply) {
+    ResponseEntity<?> replySave(HttpSession session, Reply reply) {
+        if (session.getAttribute("user") == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }
+
         reply = replyDao.save(reply.saveDefualt(reply));
-        return reply;
+        return ResponseEntity.ok(reply);
     }
 
     @RequestMapping(value = "/category", method = RequestMethod.POST)
@@ -42,19 +49,27 @@ public class BlogRestController {
     }
 
     @RequestMapping(value = "/addCategory", method = RequestMethod.POST)
-    BlogCategory addCategory(BlogCategory blogCategory) {
+    ResponseEntity<?> addCategory(HttpSession session, BlogCategory blogCategory) {
+        if (session.getAttribute("user") == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }
+
         blogCategory.setCategoryDesktopYn("Y");
         blogCategory.setCategoryLevel(1);
         blogCategory.setCategoryMobileYn("Y");
         blogCategory.setCategoryOrder(blogCategoryDao.findMaxOrder() + 1);
         blogCategory.setCategoryParent(0);
         blogCategory.setDeleteFlag("N");
-        return blogCategoryDao.save(blogCategory);
+        return ResponseEntity.ok(blogCategoryDao.save(blogCategory));
     }
 
 
     @RequestMapping(value = "/ImageUpload", method = RequestMethod.POST)
-    HashMap imageUpload(@RequestParam("upload") MultipartFile image) throws Exception {
+    ResponseEntity<?> imageUpload(HttpSession session, @RequestParam("upload") MultipartFile image) throws Exception {
+        if (session.getAttribute("user") == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }
+
         FileUtil fileUtils = new FileUtil();
         String imageUrl = null;
 
@@ -68,11 +83,15 @@ public class BlogRestController {
         resultMap.put("uploaded", "1");
         resultMap.put("url", "//leebokeum.com/images/" + imageUrl);
 
-        return resultMap;
+        return ResponseEntity.ok(resultMap);
     }
 
     @RequestMapping(value = "/FileUpload", method = RequestMethod.POST)
-    HashMap fileUpload(@RequestParam("upload") MultipartFile file) throws Exception {
+    ResponseEntity<?> fileUpload(HttpSession session, @RequestParam("upload") MultipartFile file) throws Exception {
+        if (session.getAttribute("user") == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }
+
         FileUtil fileUtils = new FileUtil();
         String fileUrl = null;
 
@@ -86,6 +105,6 @@ public class BlogRestController {
         resultMap.put("uploaded", "1");
         resultMap.put("url", "//leebokeum.com/file/" + fileUrl);
 
-        return resultMap;
+        return ResponseEntity.ok(resultMap);
     }
 }

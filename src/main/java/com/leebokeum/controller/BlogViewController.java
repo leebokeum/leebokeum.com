@@ -1,15 +1,11 @@
 package com.leebokeum.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.leebokeum.common.*;
-import com.leebokeum.dao.BlogCategoryDao;
-import com.leebokeum.dao.ContentDao;
-import com.leebokeum.dao.MenuDao;
-import com.leebokeum.dao.ReplyDao;
-import com.leebokeum.dao.vo.BlogCategory;
-import com.leebokeum.dao.vo.Content;
-import com.leebokeum.dao.vo.Menu;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +13,25 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import com.leebokeum.common.Board;
+import com.leebokeum.common.FileUtil;
+import com.leebokeum.common.HitIncement;
+import com.leebokeum.common.PageBlock;
+import com.leebokeum.common.Tags;
+import com.leebokeum.dao.BlogCategoryDao;
+import com.leebokeum.dao.ContentDao;
+import com.leebokeum.dao.MenuDao;
+import com.leebokeum.dao.ReplyDao;
+import com.leebokeum.dao.vo.BlogCategory;
+import com.leebokeum.dao.vo.Content;
+import com.leebokeum.dao.vo.Menu;
 
 /**
  * Created by 이복음 on 2017-06-06.
@@ -46,9 +49,13 @@ public class BlogViewController {
     @Autowired
     BlogCategoryDao blogCategoryDao;
 
-    //일반 글쓰기 저장
+    // 일반 글쓰기 저장
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    String save(Content contents, @RequestParam("repImage") MultipartFile repImage) throws Exception {
+    String save(HttpSession session, Content contents, @RequestParam("repImage") MultipartFile repImage) throws Exception {
+        if (session.getAttribute("user") == null) {
+            return "401";
+        }
+
         FileUtil fileUtils = new FileUtil();
         contentDao.save(contents);
 
@@ -60,7 +67,11 @@ public class BlogViewController {
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
-    String modify(Model model, @RequestParam("id") int id) {
+    String modify(HttpSession session, Model model, @RequestParam("id") int id) {
+        if (session.getAttribute("user") == null) {
+            return "401";
+        }
+
         Content content = contentDao.findOne(id);
         model.addAttribute("content", content);
         getMenu(model);
@@ -68,7 +79,11 @@ public class BlogViewController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    String update(Content content, @RequestParam("repImage") MultipartFile repImage) throws Exception {
+    String update(HttpSession session, Content content, @RequestParam("repImage") MultipartFile repImage) throws Exception {
+        if (session.getAttribute("user") == null) {
+            return "401";
+        }
+
         Content originContent = contentDao.getOne(content.getId());
         Date date = new java.util.Date();
         SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -90,7 +105,11 @@ public class BlogViewController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    String delete(@RequestParam("id") int id) {
+    String delete(HttpSession session, @RequestParam("id") int id) {
+        if (session.getAttribute("user") == null) {
+            return "401";
+        }
+
         Content content = contentDao.findOne(id);
         content.setDeleteFlag("Y");
         contentDao.save(content);
@@ -100,7 +119,7 @@ public class BlogViewController {
 
     @RequestMapping(value = "/blog")
     String blogListAll(Model model,
-                       @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageableDesc) {
+        @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageableDesc) {
         Page<Content> contentList = contentDao.findByDeleteFlag("N", pageableDesc);
         List<Content> noticeList = contentDao.findByDeleteFlagAndNoticeFlagOrderByIdDesc("N", "Y");
         List<BlogCategory> categoryList = blogCategoryDao.findAll();
@@ -118,8 +137,8 @@ public class BlogViewController {
 
     @RequestMapping(value = "/blog/{categoryId}")
     String blogListByCategory(Model model,
-                              @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageableDesc,
-                              @PathVariable int categoryId) {
+        @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageableDesc,
+        @PathVariable int categoryId) {
         Page<Content> contentList = contentDao.findByDeleteFlagAndCategoryId("N", categoryId, pageableDesc);
         List<Content> noticeList = contentDao.findByDeleteFlagAndNoticeFlagOrderByIdDesc("N", "Y");
         List<BlogCategory> categoryList = blogCategoryDao.findAll();
@@ -150,8 +169,8 @@ public class BlogViewController {
 
     @RequestMapping(value = "/blog/tag/{tag}")
     String blogListByTag(Model model,
-                              @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageableDesc,
-                              @PathVariable String tag) {
+        @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageableDesc,
+        @PathVariable String tag) {
         String tag_ = "%" + tag + "%";
         Page<Content> contentList = contentDao.findByDeleteFlagAndTagLikeOrderByIdDesc("N", tag_, pageableDesc);
         List<Content> noticeList = contentDao.findByDeleteFlagAndNoticeFlagOrderByIdDesc("N", "Y");
@@ -169,8 +188,8 @@ public class BlogViewController {
 
     @RequestMapping(value = "/blog/search" , method = RequestMethod.POST)
     String blogListByKeyowrd(Model model,
-                         @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageableDesc,
-                             @RequestParam("keyword") String keyword) {
+        @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageableDesc,
+        @RequestParam("keyword") String keyword) {
         String keyword_ = "%" + keyword + "%";
         Page<Content> contentList = contentDao.findByDeleteFlagAndContentsLikeOrderByIdDesc("N", keyword_, pageableDesc);
         List<Content> noticeList = contentDao.findByDeleteFlagAndNoticeFlagOrderByIdDesc("N", "Y");

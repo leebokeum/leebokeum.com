@@ -62,6 +62,7 @@ public class ViewController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assert resources != null;
         model.addAttribute("imgCount", Integer.toString(resources.length - 2));
         return "har_portfolio";
     }
