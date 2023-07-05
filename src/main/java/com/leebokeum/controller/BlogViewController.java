@@ -52,7 +52,7 @@ public class BlogViewController {
     // 일반 글쓰기 저장
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     String save(HttpSession session, Content contents, @RequestParam("repImage") MultipartFile repImage) throws Exception {
-        if (session.getAttribute("user") == null) {
+        if (session.getAttribute("sessionUser") == null) {
             return "401";
         }
 
@@ -68,7 +68,7 @@ public class BlogViewController {
 
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     String modify(HttpSession session, Model model, @RequestParam("id") int id) {
-        if (session.getAttribute("user") == null) {
+        if (session.getAttribute("sessionUser") == null) {
             return "401";
         }
 
@@ -80,7 +80,7 @@ public class BlogViewController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     String update(HttpSession session, Content content, @RequestParam("repImage") MultipartFile repImage) throws Exception {
-        if (session.getAttribute("user") == null) {
+        if (session.getAttribute("sessionUser") == null) {
             return "401";
         }
 
@@ -106,7 +106,7 @@ public class BlogViewController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     String delete(HttpSession session, @RequestParam("id") int id) {
-        if (session.getAttribute("user") == null) {
+        if (session.getAttribute("sessionUser") == null) {
             return "401";
         }
 
