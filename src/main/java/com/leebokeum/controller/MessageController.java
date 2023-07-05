@@ -24,7 +24,7 @@ public class MessageController {
 
     @RequestMapping(value = "/messageSave", method = RequestMethod.POST)
     ResponseEntity<?> messageSave(HttpSession session, Message message) {
-        if (session.getAttribute("user") == null) {
+        if (session.getAttribute("sessionUser") == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
         }
 

@@ -35,7 +35,7 @@ public class BlogRestController {
     //댓글 쓰기
     @RequestMapping(value = "/replySave", method = RequestMethod.POST)
     ResponseEntity<?> replySave(HttpSession session, Reply reply) {
-        if (session.getAttribute("user") == null) {
+        if (session.getAttribute("sessionUser") == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
         }
 
@@ -50,7 +50,7 @@ public class BlogRestController {
 
     @RequestMapping(value = "/addCategory", method = RequestMethod.POST)
     ResponseEntity<?> addCategory(HttpSession session, BlogCategory blogCategory) {
-        if (session.getAttribute("user") == null) {
+        if (session.getAttribute("sessionUser") == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
         }
 
@@ -66,7 +66,7 @@ public class BlogRestController {
 
     @RequestMapping(value = "/ImageUpload", method = RequestMethod.POST)
     ResponseEntity<?> imageUpload(HttpSession session, @RequestParam("upload") MultipartFile image) throws Exception {
-        if (session.getAttribute("user") == null) {
+        if (session.getAttribute("sessionUser") == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
         }
 
@@ -88,7 +88,7 @@ public class BlogRestController {
 
     @RequestMapping(value = "/FileUpload", method = RequestMethod.POST)
     ResponseEntity<?> fileUpload(HttpSession session, @RequestParam("upload") MultipartFile file) throws Exception {
-        if (session.getAttribute("user") == null) {
+        if (session.getAttribute("sessionUser") == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
         }
 
