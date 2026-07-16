@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+    const posts = await getCollection('blog');
+    return posts.map((post) => ({ params: { id: post.id } }));
+}
+
+const { id } = Astro.params;
+const target = `/blog/${id}/`;
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content={`0; url=${target}`}>
+    <link rel="canonical" href={target}>
+    <title>이동 중…</title>
+</head>
+<body>
+    <a href={target}>새 주소로 이동</a>
+</body>
+</html>
