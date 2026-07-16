@@ -1,0 +1,91 @@
+---
+import Side from './Side.astro';
+
+interface Props {
+    page: any;             // Astro paginate() 결과
+    activeCategory?: string | null;
+}
+const { page, activeCategory = null } = Astro.props;
+
+function day(date) {
+    return String(date.getDate()).padStart(2, '0');
+}
+function yearMonth(date) {
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+}
+
+// 페이지네이터 base 경로: 현재 URL에서 페이지 번호 세그먼트를 제거해 계산
+// (page.url.first는 1페이지에서 undefined이므로 사용하지 않음)
+const currentPath = page.url.current.replace(/\/+$/, '');
+const basePath = page.currentPage === 1
+    ? currentPath
+    : currentPath.replace(new RegExp(`/${page.currentPage}$`), '');
+function pageUrl(n) {
+    return n === 1 ? `${basePath}/` : `${basePath}/${n}/`;
+}
+---
+<div id="content-wrapper">
+    <div class="container-above-header"></div>
+    <div class="blocks-container">
+        <div class="container blog-wrapper">
+            <div class="row">
+                <div class="col-md-9">
+                    {page.data.map((post) => (
+                        <div class="blog-entry wow fadeInLeft animated" style="visibility: hidden; animation-name: none;">
+                            <div class="data-column">
+                                <div class="date">
+                                    <span>{day(post.data.date)}</span> {yearMonth(post.data.date)}
+                                </div>
+                                <div class="data-entry">
+                                    <span class="icon-entry like"></span><br>{post.data.likes}
+                                </div>
+                                <div class="data-entry">
+                                    <span class="icon-entry views"></span><br>{post.data.hit}
+                                </div>
+                                <div class="data-entry">
+                                    <span class="icon-entry comments"></span><br>{post.data.legacyComments.length}
+                                </div>
+                            </div>
+                            <div class="content">
+                                {post.data.repImg ? (
+                                    <>
+                                        <a class="thumbnail-entry" href={`/blog/${post.id}/`}>
+                                            <img class="thumbnail-img" src={post.data.repImg} alt="">
+                                        </a>
+                                        <a class="title" href={`/blog/${post.id}/`}>{post.data.title}</a>
+                                    </>
+                                ) : (
+                                    <a class="thumbnail-entry" href={`/blog/${post.id}/`}>
+                                        <blockquote>
+                                            <p>{post.data.title}</p>
+                                            <footer><cite>leebokeum.com</cite>, {post.data.author}</footer>
+                                        </blockquote>
+                                    </a>
+                                )}
+                                <div class="author">
+                                    <a href={`/blog/${post.id}/`}>Written</a> by <b>{post.data.author}</b>
+                                </div>
+                                <div class="description">{post.data.subTitle}</div>
+                                <a class="button" href={`/blog/${post.id}/`}>Read More</a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    ))}
+                    <div class="paginator wow fadeInUp animated" style="visibility: hidden; animation-name: none;">
+                        <ul>
+                            {Array.from({ length: page.lastPage }, (_, i) => i + 1).map((n) => (
+                                <li><a class={n === page.currentPage ? 'active' : ''} href={pageUrl(n)}>{n}</a></li>
+                            ))}
+                        </ul>
+                        <div>
+                            <a class="button" href={page.url.prev ?? '#'}>Prev Page</a>
+                            <a class="button" href={page.url.next ?? '#'}>Next Page</a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <Side activeCategory={activeCategory} />
+            </div>
+        </div>
+    </div>
+</div>
