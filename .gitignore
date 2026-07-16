@@ -27,3 +27,9 @@ nbdist/
 application.properties
 ### docs (로컬 전용) ###
 docs/
+
+### Astro ###
+node_modules/
+dist/
+.astro/
+.DS_Store
