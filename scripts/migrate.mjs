@@ -70,7 +70,10 @@ for (const p of posts) {
         title: p.title || '(제목 없음)',
         date: p.create_date, // mysql2가 Date로 반환 → YAML이 ISO 문자열로 직렬화
         category: categoryById.get(p.category_id) ?? '미분류',
-        tags: (p.tag ?? '').split(',').map((t) => t.trim()).filter(Boolean),
+        tags: (p.tag ?? '')
+            .split(/[,#]/)
+            .map((t) => t.trim())
+            .filter(Boolean),
         author: p.creater_name || '이복음',
         subTitle: p.sub_title ?? '',
         repImg: p.rep_img ? `/images/${p.rep_img}` : null,

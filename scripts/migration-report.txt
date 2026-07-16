@@ -17,6 +17,3 @@ post 47: http://img.hankyung.com/photo/201808/01.17637311.1.jpg
 post 59: http://weekly.chosun.com/up_fd/wc_news/2417/bimg_org/2417_12.jpg
 post 73: https://i1.wp.com/mimoonchurch.com/wp-content/uploads/2020/07/depositphotos_105721212-stock-photo-sauls-death.jpg?w=700
 post 73: https://i1.wp.com/mimoonchurch.com/wp-content/uploads/2020/07/FXBut_qC_org_2_640by.jpg?w=700
-
-=== 잔여 leebokeum.com 텍스트 언급 (URL 아님, 치환 대상 아님) ===
-post 11: tag "leebokeum.com" 및 본문 문장 내 일반 텍스트 언급 (href/src 아님)
