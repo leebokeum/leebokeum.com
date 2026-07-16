@@ -1,0 +1,170 @@
+---
+// 원본 har_portfolio.jsp의 <c:forEach begin='1' end='${imgCount}'>는 컨트롤러에서
+// /flipbook/portfolio 폴더의 이미지 수(-2)로 계산되던 값. 정적 자산 기준 26장(2~27번) 고정.
+const pageNumbers = Array.from({ length: 26 }, (_, i) => i + 2);
+---
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <script is:inline>(function (H) {
+        H.className = H.className.replace(/\bno-js\b/, 'js')
+    })(document.documentElement)</script>
+    <meta charset="utf-8">
+    <style is:inline>
+        .js #features {
+            margin-left: -12000px;
+            width: 100%;
+        }
+
+    </style>
+    <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+       Remove this if you use the .htaccess -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <!--  Mobile viewport optimized: j.mp/bplateviewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>har portfolio</title>
+    <link rel="apple-touch-icon" href="/img/logo.png" />
+    <link rel="shortcut icon" href="/img/logo.png" />
+
+    <meta name="description" content="한아름 포트폴리오">
+    <meta name="author" content="한아름">
+
+    <!-- CSS : implied media="all" -->
+    <link rel="stylesheet" href="/flipbook/css/style.css">
+    <link rel="stylesheet" href="/flipbook/css/wow_book.css" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/flipbook/css/preview.css">
+
+    <link href='//fonts.googleapis.com/css?family=News+Cycle' rel='stylesheet' type='text/css'>
+    <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+    <script is:inline src="/flipbook/js/modernizr-1.6.min.js"></script>
+
+</head>
+<body>
+<div id="container">
+    <nav>
+        <ul>
+            <li><a id='first' href="#" title='goto first page'>First page</a></li>
+            <li><a id='back' href="#" title='go back one page'>Back</a></li>
+            <li><a id='next' href="#" title='go foward one page'>Next</a></li>
+            <li><a id='last' href="#" title='goto last page'>last page</a></li>
+            <li><a id='zoomin' href="#" title='zoom in'>Zoom In</a></li>
+            <li><a id='zoomout' href="#" title='zoom out'>Zoom Out</a></li>
+            <li><a id='slideshow' href="#" title='start slideshow'>Slide Show</a></li>
+            <li><a id='flipsound' href="#" title='flip sound on/off'>Flip sound</a></li>
+            <li><a id='fullscreen' href="#" title='fullscreen on/off'>Fullscreen</a></li>
+            <li><a id='thumbs' href="#" title='thumbnails on/off'>Thumbs</a></li>
+        </ul>
+    </nav>
+    <div id="main">
+        <div id='features'>
+            <div id='cover'>
+            </div>
+
+            {pageNumbers.map((n) => (
+                <div style="padding: 0px">
+                    <img src={`/flipbook/portfolio/Portfolio_2nd_2_${n}.jpg`} width="100%" height="100%"/>
+                </div>
+            ))}
+
+            <div class='last_cover'>
+                <img src="/flipbook/portfolio/lastcover.jpg" width="100%" height="100%"/>
+            </div>
+        </div> <!-- features -->
+
+    </div>
+    <div id='thumbs_holder'>
+    </div>
+    <footer>
+
+    </footer>
+</div> <!--! end of #container -->
+
+<!-- Javascript at the bottom for fast page loading -->
+
+<!-- Grab Google CDN's jQuery. fall back to local if necessary -->
+<script is:inline src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script is:inline>!window.jQuery && document.write(unescape('%3Cscript src="/js/jquery-2.2.4.min.js"%3E%3C/script%3E'))</script>
+
+<script type="text/javascript" is:inline src="/flipbook/wow_book.min.js"></script>
+
+<script type="text/javascript" is:inline>
+    $(document).ready(function () {
+        $('#features').wowBook({
+            height: 500
+            , width: 800
+            , centeredWhenClosed: true
+            , hardcovers: true
+            , turnPageDuration: 1000
+            , numberedPages: [1, -2]
+            , controls: {
+                zoomIn: '#zoomin',
+                zoomOut: '#zoomout',
+                next: '#next',
+                back: '#back',
+                first: '#first',
+                last: '#last',
+                slideShow: '#slideshow',
+                flipSound: '#flipsound',
+                thumbnails: '#thumbs',
+                fullscreen: '#fullscreen'
+            }
+            , scaleToFit: "#container"
+            , thumbnailsPosition: 'bottom'
+            , onFullscreenError: function () {
+                var msg = "Fullscreen failed.";
+                if (self != top) msg = "The frame is blocking full screen mode. Click on 'remove frame' button above and try to go full screen again."
+                alert(msg);
+            }
+        }).css({'display': 'none', 'margin': 'auto'}).fadeIn(1000);
+
+        $("#cover").click(function () {
+            $.wowBook("#features").advance();
+        });
+
+        var book = $.wowBook("#features");
+
+        function rebuildThumbnails() {
+            book.destroyThumbnails()
+            book.showThumbnails()
+            $("#thumbs_holder").css("marginTop", -$("#thumbs_holder").height() / 2)
+        }
+
+        $("#thumbs_position button").on("click", function () {
+            var position = $(this).text().toLowerCase()
+            if ($(this).data("customized")) {
+                position = "top"
+                book.opts.thumbnailsParent = "#thumbs_holder";
+            } else {
+                book.opts.thumbnailsParent = "body";
+            }
+            book.opts.thumbnailsPosition = position
+            rebuildThumbnails();
+        })
+        $("#thumb_automatic").click(function () {
+            book.opts.thumbnailsSprite = null
+            book.opts.thumbnailWidth = null
+            rebuildThumbnails();
+        })
+        $("#thumb_sprite").click(function () {
+            book.opts.thumbnailsSprite = "images/thumbs.jpg"
+            book.opts.thumbnailWidth = 136
+            rebuildThumbnails();
+        })
+        $("#thumbs_size button").click(function () {
+            var factor = 0.02 * ($(this).index() ? -1 : 1);
+            book.opts.thumbnailScale = book.opts.thumbnailScale + factor;
+            rebuildThumbnails();
+        })
+
+    });
+</script>
+
+<!-- scripts concatenated and minified via ant build script-->
+<script is:inline src="/flipbook/js/plugins.js"></script>
+<script is:inline src="/flipbook/js/script.js"></script>
+<!-- end concatenated and minified scripts-->
+
+</body>
+</html>
