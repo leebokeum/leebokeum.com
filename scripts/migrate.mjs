@@ -1,3 +1,5 @@
+// 주의: 1회성 마이그레이션 스크립트. 재실행하면 src/content/blog/ 전체가 DB 기준으로
+// 재생성되므로, 마이그레이션 이후 직접 작성한 글이 있다면 삭제된다.
 import fs from 'node:fs';
 import path from 'node:path';
 
