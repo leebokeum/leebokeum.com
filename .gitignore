@@ -25,3 +25,5 @@ nbdist/
 .nb-gradle/
 
 application.properties
+### docs (로컬 전용) ###
+docs/
