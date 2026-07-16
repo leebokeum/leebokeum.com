@@ -1,0 +1,53 @@
+---
+const menus = [
+    { name: 'Home', link: '/', sub: [] },
+    { name: 'Blog', link: '/blog', sub: [{ name: '복음이의 블로그', link: '/blog' }] },
+    { name: 'About', link: '/about', sub: [] },
+    { name: 'Contact', link: '/contact', sub: [] },
+    {
+        name: 'Portfolio', link: '#', sub: [
+            { name: '한아름1', link: '/portfolio/har', targetBlank: true },
+            { name: '한아름2', link: 'http://hahnareum.s3-website.ap-northeast-2.amazonaws.com/', targetBlank: true },
+        ],
+    },
+];
+---
+<header class="">
+    <div class="container">
+        <div id="logo-wrapper">
+            <div class="cell-view"><a id="logo" href="/"><img src="/img/logo_black.png" width="150" alt=""></a></div>
+        </div>
+        <div class="open-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="header-container">
+            <div class="scrollable-container">
+                <div class="header-right">
+                    <nav>
+                        {menus.map((menu) => (
+                            <div class="menu-entry">
+                                <a href={menu.link}>{menu.name}</a>
+                                {menu.sub.length > 0 && (
+                                    <>
+                                        <span class="submenu-icon"><span class="glyphicon glyphicon-chevron-down"></span></span>
+                                        <div class="submenu">
+                                            <div>
+                                                {menu.sub.map((sub) => (
+                                                    sub.targetBlank
+                                                        ? <a href={sub.link} target="_blank">{sub.name}</a>
+                                                        : <a href={sub.link}>{sub.name}</a>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        ))}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
