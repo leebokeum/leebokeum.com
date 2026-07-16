@@ -72,8 +72,8 @@ function pageUrl(n) {
                             ))}
                         </ul>
                         <div>
-                            <a class="button" href={page.url.prev ?? '#'}>Prev Page</a>
-                            <a class="button" href={page.url.next ?? '#'}>Next Page</a>
+                            <a class="button" href={page.url.prev ? pageUrl(page.currentPage - 1) : '#'}>Prev Page</a>
+                            <a class="button" href={page.url.next ? pageUrl(page.currentPage + 1) : '#'}>Next Page</a>
                         </div>
                         <div class="clear"></div>
                     </div>
