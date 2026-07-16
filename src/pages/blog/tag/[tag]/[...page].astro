@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import BlogList from '../../../../components/BlogList.astro';
+
+export async function getStaticPaths({ paginate }) {
+    const posts = (await getCollection('blog'))
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+    const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
+    return tags.flatMap((tag) =>
+        paginate(posts.filter((p) => p.data.tags.includes(tag)), {
+            params: { tag },
+            pageSize: 5,
+        }));
+}
+
+const { page } = Astro.props;
+const { tag } = Astro.params;
+---
+<BaseLayout title={`#${tag} - leebokeum.com`}>
+    <BlogList page={page} />
+    <script is:inline slot="scripts">
+        $(function () {
+            $(".menu-entry").eq(1).addClass("active");
+        });
+    </script>
+</BaseLayout>
