@@ -1,0 +1,22 @@
+SKIP(secret) id=15 title=기도의 힘 
+SKIP(secret) id=16 title=끈기 
+SKIP(secret) id=27 title=우리집에 처음 방문한 손님
+
+총 글(delete_flag=N): 53
+변환: 50
+비공개 제외: 3
+
+=== 외부 도메인 이미지 (수동 확인 대상) ===
+post 43: http://linkback.etoday.co.kr/images/onebyone.gif?action_id=a10dcb706bc6984b5322114a741d527
+post 46: https://imgnews.pstatic.net/image/050/2018/08/27/75b3a641b2fb684a7cb5721913ed0c5f_20180827221809920.jpg?type=w647
+post 46: https://imgnews.pstatic.net/image/050/2018/08/27/0c96f99fe215db378d4054cac5ca8ba4_20180827221809934.jpg?type=w647
+post 47: http://img.hankyung.com/photo/201808/01.17637310.1.jpg
+post 47: http://img.hankyung.com/photo/201808/01.17637309.1.jpg
+post 47: http://img.hankyung.com/photo/201808/ZA.17617661.1.jpg
+post 47: http://img.hankyung.com/photo/201808/01.17637311.1.jpg
+post 59: http://weekly.chosun.com/up_fd/wc_news/2417/bimg_org/2417_12.jpg
+post 73: https://i1.wp.com/mimoonchurch.com/wp-content/uploads/2020/07/depositphotos_105721212-stock-photo-sauls-death.jpg?w=700
+post 73: https://i1.wp.com/mimoonchurch.com/wp-content/uploads/2020/07/FXBut_qC_org_2_640by.jpg?w=700
+
+=== 잔여 leebokeum.com 텍스트 언급 (URL 아님, 치환 대상 아님) ===
+post 11: tag "leebokeum.com" 및 본문 문장 내 일반 텍스트 언급 (href/src 아님)
