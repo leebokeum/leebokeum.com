@@ -1,0 +1,101 @@
+---
+import { getCollection, render } from 'astro:content';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Side from '../../components/Side.astro';
+import { day, yearMonth, kstDateParts } from '../../utils/date.mjs';
+
+export async function getStaticPaths() {
+    const posts = await getCollection('blog');
+    return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const ogImage = post.data.repImg
+    ? `https://leebokeum.com${post.data.repImg}`
+    : 'https://leebokeum.com/img/link.jpg';
+
+// 댓글 날짜도 글 날짜와 동일하게 KST 기준으로 표시
+function commentDate(isoString) {
+    const { year, month, day } = kstDateParts(new Date(isoString));
+    return `${year}-${month}-${day}`;
+}
+---
+<BaseLayout
+    title={post.data.title}
+    ogType="article"
+    ogImage={ogImage}
+    ogDescription={post.data.subTitle}
+    ogUrl={`https://leebokeum.com/blog/${post.id}/`}>
+    <link slot="head" href="/ckeditor/contents.css" rel="stylesheet">
+    <link slot="head" href="/css/content.css" rel="stylesheet">
+
+    <div id="content-wrapper">
+        <div class="container-above-header"></div>
+        <div class="blocks-container">
+            <div class="container blog-wrapper">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="blog-entry wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
+                            <div class="data-column">
+                                <div class="date"><span>{day(post.data.date)}</span> {yearMonth(post.data.date)}</div>
+                                <div class="data-entry"><span class="icon-entry like"></span><br>{post.data.likes}</div>
+                                <div class="data-entry"><span class="icon-entry views"></span><br>{post.data.hit}</div>
+                                <div class="data-entry"><span class="icon-entry comments"></span><br>{post.data.legacyComments.length}</div>
+                            </div>
+                            <div class="content">
+                                <h1 class="title" data-pagefind-body>{post.data.title}</h1>
+                                <div class="author">
+                                    <a href="#">Written</a> by <b><a href="/about">{post.data.author}</a></b>
+                                </div>
+                                {post.data.repImg && (
+                                    <div class="thumbnail-entry">
+                                        <img class="thumbnail-img" src={post.data.repImg} alt="">
+                                    </div>
+                                )}
+                                <div class="typography-block cke_contents_ltr" data-pagefind-body>
+                                    <Content />
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="blog-detail-content">
+                            <div class="blog-comments">
+                                <div class="row wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+                                    <div class="block-header col-md-6 col-md-offset-3 col-sm-12 col-sm-offset-0">
+                                        <h2 class="title">이전 댓글 (<span>{post.data.legacyComments.length}</span>)</h2>
+                                    </div>
+                                </div>
+                                <div class="comment-wrapper">
+                                    {post.data.legacyComments.map((reply) => (
+                                        <div class="comment-entry wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                                            <img class="comment-icon img-circle" src="/img/person2.png" alt="">
+                                            <div class="title">
+                                                <span class="name">{reply.author}</span> , {commentDate(reply.date)}
+                                            </div>
+                                            <div class="description" set:html={reply.body}></div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div class="form-block wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                                    <div class="form-wrapper">
+                                        <div class="giscus"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <Side />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script is:inline slot="scripts">
+        $(function () {
+            $(".menu-entry").eq(1).addClass("active");
+        });
+    </script>
+</BaseLayout>
