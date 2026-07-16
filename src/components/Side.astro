@@ -1,0 +1,63 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+    activeCategory?: string | null;
+}
+const { activeCategory = null } = Astro.props;
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const categories = [...new Set(posts.map((p) => p.data.category))];
+// 인기 게시물: 조회수 상위 3건
+const popular = [...posts].sort((a, b) => b.data.hit - a.data.hit).slice(0, 3);
+// 인기 태그: 빈도 상위 10건
+const tagCount = new Map();
+for (const p of posts) {
+    for (const t of p.data.tags) {
+        tagCount.set(t, (tagCount.get(t) ?? 0) + 1);
+    }
+}
+const topTags = [...tagCount.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10).map(([t]) => t);
+---
+<div class="col-md-3 wow fadeInRight animated">
+    <div class="search-form">
+        <form action="/search" method="get">
+            <input type="text" placeholder="Keyword ..." name="q"> <input type="submit" value="">
+        </form>
+    </div>
+    <div class="side-menu">
+        <div class="title">블로그 카테고리</div>
+        <a href="/blog" class={activeCategory === null ? 'side-menu-item active' : 'side-menu-item'}>
+            <span class="glyphicon glyphicon-chevron-right"></span>전체</a>
+        {categories.map((cat) => (
+            <a href={`/blog/category/${cat}/`} class={activeCategory === cat ? 'side-menu-item active' : 'side-menu-item'}>
+                <span class="glyphicon glyphicon-chevron-right"></span>{cat}</a>
+        ))}
+    </div>
+    <div class="side-menu">
+        <div class="title">인기 게시물</div>
+        <div class="row nopadding">
+            <div class="col-xs-12 col-sm-6 col-md-12 nopadding">
+                {popular.map((post) => (
+                    <div class="side-menu-image-item">
+                        {post.data.repImg && (
+                            <a class="image" href={`/blog/${post.id}/`}><img src={post.data.repImg} alt=""></a>
+                        )}
+                        <a class="title" href={`/blog/${post.id}/`}>{post.data.title}</a>
+                        <div class="author">
+                            <a href={`/blog/${post.id}/`}>Written</a> by <b>{post.data.author}</b>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+    <div class="side-menu">
+        <div class="title">인기태그</div>
+        <div class="tags-wrapper">
+            {topTags.map((tag) => (
+                <a class="tag active" href={`/blog/tag/${tag}/`}>{tag}</a>
+            ))}
+        </div>
+    </div>
+</div>

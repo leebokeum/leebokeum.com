@@ -1,0 +1,86 @@
+---
+import Nav from '../components/Nav.astro';
+
+interface Props {
+    title?: string;
+    ogType?: string;
+    ogImage?: string;
+    ogDescription?: string;
+    ogUrl?: string;
+}
+
+const {
+    title = 'leebokeum.com',
+    ogType = 'website',
+    ogImage = 'https://leebokeum.com/img/link.jpg',
+    ogDescription = '이복음의 개인 웹사이트입니다. 이복음 소개, 블로그등을 보실 수 있습니다.',
+    ogUrl = 'https://leebokeum.com/',
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:url" content={ogUrl}>
+    <meta property="og:type" content={ogType}>
+    <meta property="og:title" content={title}>
+    <meta property="og:image" content={ogImage}>
+    <meta property="og:description" content={ogDescription}>
+
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="shortcut icon" href="/img/logo.png">
+
+    <title>{title}</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/idangerous.swiper.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/customizing.css" rel="stylesheet">
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <slot name="head" />
+</head>
+<body>
+<Nav />
+<slot />
+<hr>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <li><a href="https://twitter.com/leebokeum87" target="_blank" class="twitter"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a></li>
+                    <li><a href="https://www.facebook.com/leebokeum87" target="_blank" class="facebook"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a></li>
+                    <li><a href="https://github.com/leebokeum" target="_blank" class="github"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></li>
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; leebokeum 2016</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/jquery-2.2.4.min.js" is:inline></script>
+<script src="/js/bootstrap.min.js" is:inline></script>
+<script src="/js/idangerous.swiper.min.js" is:inline></script>
+<script src="/js/global.js" is:inline></script>
+<script src="/js/wow.min.js" is:inline></script>
+<script is:inline>
+    var wow = new WOW({
+        boxClass: 'wow',
+        animateClass: 'animated',
+        offset: 100,
+        mobile: true,
+        live: true,
+    });
+    wow.init();
+</script>
+<slot name="scripts" />
+</body>
+</html>
