@@ -19,8 +19,6 @@ npm run build     # 빌드 (astro build + pagefind 인덱싱) → dist/
 npm run preview   # 빌드 결과 미리보기
 ```
 
-> `.npmrc`로 공개 npm 레지스트리를 명시하고 있습니다. 사내 레지스트리 URL이 lockfile에 섞이면 CI가 깨지므로 유지해야 합니다.
-
 ## 글 작성
 
 `src/content/blog/`에 마크다운 파일을 추가하고 master에 푸시하면 끝입니다.
