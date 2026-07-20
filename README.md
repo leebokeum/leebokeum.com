@@ -43,7 +43,15 @@ repImg: /images/대표이미지.jpg   # 없으면 생략
 
 ## 배포
 
-master에 푸시하면 GitHub Actions(`.github/workflows/deploy.yml`)가 빌드 후 GitHub Pages로 배포합니다. 별도 서버·DB 없이 전부 정적으로 서빙됩니다.
+master에 푸시하면 GitHub Actions(`.github/workflows/deploy.yml`)가 빌드 후 GitHub Pages로 배포합니다.
+
+GitHub Pages는 Node 서버를 실행할 수 없는 정적 파일 호스팅이지만, **Node가 필요한 시점은 서빙할 때가 아니라 빌드할 때뿐**이라 문제가 없습니다:
+
+1. **빌드** — master 푸시 시 GitHub Actions의 ubuntu VM에서 Node 22로 `npm run build`를 실행합니다. Node가 실제로 돌아가는 곳은 여기, 빌드하는 몇 분간뿐입니다.
+2. **정적 파일 생성** — 빌드가 끝나면 `dist/`에 순수 HTML/CSS/JS/이미지만 남습니다. 블로그 글, 카테고리/태그별 페이지 전부가 이 시점에 미리 HTML로 만들어집니다. `blog/[id].astro` 같은 동적 라우트도 빌드 때 글 개수만큼 펼쳐져 정적 파일이 됩니다.
+3. **서빙** — `dist/`를 Pages에 업로드하면, 이후 방문자 요청에는 GitHub의 정적 서버가 파일을 그대로 돌려줄 뿐입니다. 런타임에 실행되는 서버 코드는 0줄입니다.
+
+동적으로 보이는 기능들도 서버 없이 동작합니다. 검색은 Pagefind가 빌드 때 만들어둔 인덱스를 브라우저에서 fetch해 클라이언트에서 수행하고, 구 서버의 댓글은 `legacyComments`로 frontmatter에 옮겨 빌드 시 HTML로 굳혔습니다. 서버·DB가 없으므로 트래픽 부하에 강한 대신, 쓰기가 필요한 기능(실시간 댓글, 조회수 증가 등)은 지원하지 않습니다.
 
 ## 구조
 
